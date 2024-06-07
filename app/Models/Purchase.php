@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
@@ -21,14 +22,14 @@ class Purchase extends Model
 
     public $translatable = ['cart_name', 'cart_text', 'short_descript'];
 
-    public function sub_category()
+    public function sub_category(): BelongsTo
     {
 
         return $this->belongsTo(\App\Models\Sub_Category::class, 'sub_category_id');
 
     }//end of sub_category
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(\App\Models\User::class, 'users_id');
     }//end of users

@@ -11,7 +11,7 @@ class PayCurrencieTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $links = ['Bitcoin', 'Dogecoin', 'Etherum', 'usdt'];
 

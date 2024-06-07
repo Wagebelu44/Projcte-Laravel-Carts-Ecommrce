@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
@@ -31,7 +32,7 @@ class User extends Authenticatable
 
     }//end of get image path
 
-    public function cupon()
+    public function cupon(): HasMany
     {
         return $this->hasMany('App\Models\cupon');
     }

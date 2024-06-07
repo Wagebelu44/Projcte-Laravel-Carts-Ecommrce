@@ -11,7 +11,7 @@ class CartStoreRequests extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,7 +21,7 @@ class CartStoreRequests extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'cart_name' => 'required|min:2|max:150',
@@ -32,7 +32,7 @@ class CartStoreRequests extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'cart_name.required' => trans('validation.required'),

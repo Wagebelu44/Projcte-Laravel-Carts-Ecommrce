@@ -31,7 +31,7 @@ class UpdateCoupon implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
 
         if (! session()->get('rate') == null) {

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
@@ -13,17 +15,17 @@ class sub_category extends Model
 
     public $translatable = ['name'];
 
-    public function parent_category()
+    public function parent_category(): BelongsTo
     {
         return $this->belongsTo(\App\Models\Parent_Category::class, 'parent_category_id');
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(\App\Models\User::class);
     }
 
-    public function howuse()
+    public function howuse(): HasMany
     {
         return $this->hasMany(\App\Models\HowUse::class, 'sub_categorys_id');
     }

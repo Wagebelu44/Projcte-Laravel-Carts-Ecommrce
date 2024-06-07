@@ -11,12 +11,12 @@ class CartDetailRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         $rules = [
             'cart_name' => 'required|min:2|max:150',
@@ -36,7 +36,7 @@ class CartDetailRequest extends FormRequest
         return $rules;
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'cart_name.required' => trans('validation.required'),

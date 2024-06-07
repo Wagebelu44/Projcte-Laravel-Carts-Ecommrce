@@ -11,7 +11,7 @@ class SubCategoryTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $sub_category = \App\Models\Sub_Category::create([
             'user_id' => '1',

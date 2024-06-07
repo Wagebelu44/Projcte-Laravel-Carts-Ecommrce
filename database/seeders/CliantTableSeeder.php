@@ -11,7 +11,7 @@ class CliantTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $user = \App\Models\Cliant::create([
             'name' => 'Cliant',

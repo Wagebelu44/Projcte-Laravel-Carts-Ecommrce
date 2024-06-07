@@ -11,7 +11,7 @@ class GenerateCartRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,7 +21,7 @@ class GenerateCartRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'cart_name' => 'required',
@@ -36,7 +36,7 @@ class GenerateCartRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'cart_name.required' => trans('validation.required'),

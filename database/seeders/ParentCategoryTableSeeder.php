@@ -11,7 +11,7 @@ class ParentCategoryTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $parent_category = \App\Models\Parent_Category::create([
             'name' => ['ar' => 'متاجر رثقميه', 'en' => 'testing'],

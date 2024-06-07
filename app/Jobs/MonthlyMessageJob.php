@@ -34,7 +34,7 @@ class MonthlyMessageJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
 
         $email = $this->email;

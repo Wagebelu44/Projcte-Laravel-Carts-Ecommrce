@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
@@ -21,12 +22,12 @@ class CartDetail extends Model
 
     } //end of get image path
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(\App\Models\User::class, 'users_id');
     }
 
-    public function sub_category()
+    public function sub_category(): BelongsTo
     {
 
         return $this->belongsTo(\App\Models\Sub_Category::class, 'sub_category_id');
