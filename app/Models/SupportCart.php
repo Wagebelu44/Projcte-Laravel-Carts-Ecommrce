@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Translatable\HasTranslations;
 
 class SupportCart extends Model
@@ -13,7 +14,7 @@ class SupportCart extends Model
 
     public $translatable = ['cart_type', 'name_cart', 'details_cart'];
 
-    public function cliant()
+    public function cliant(): BelongsTo
     {
         return $this->belongsTo(\App\Models\Cliant::class);
     }

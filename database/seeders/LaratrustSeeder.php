@@ -11,10 +11,8 @@ class LaratrustSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->truncateLaratrustTables();
 
@@ -77,10 +75,8 @@ class LaratrustSeeder extends Seeder
 
     /**
      * Truncates all the laratrust tables and the users table
-     *
-     * @return void
      */
-    public function truncateLaratrustTables()
+    public function truncateLaratrustTables(): void
     {
         $this->command->info('Truncating User, Role and Permission tables');
         Schema::disableForeignKeyConstraints();

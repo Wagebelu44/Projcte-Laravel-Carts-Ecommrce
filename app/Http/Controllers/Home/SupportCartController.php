@@ -8,6 +8,7 @@ use App\Models\Parent_Category;
 use App\Models\SupportCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
 class SupportCartController extends Controller
 {
@@ -19,10 +20,8 @@ class SupportCartController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         if (session()->get('rate') == null) {
 
@@ -129,9 +128,8 @@ class SupportCartController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\SupportCart  $supportCart
-     * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id): View
     {
         $ticits = SupportCart::find($id);
         // dd($ticits);

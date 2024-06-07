@@ -28,10 +28,8 @@ class Notify extends Mailable
 
     /**
      * Build the message.
-     *
-     * @return $this
      */
-    public function build()
+    public function build(): static
     {
         $product = $this->product;
 

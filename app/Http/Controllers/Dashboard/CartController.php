@@ -8,7 +8,9 @@ use App\Models\CartDetail;
 use App\Models\Market;
 use App\Models\Product;
 use App\Models\Sub_Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CartController extends Controller
 {
@@ -43,7 +45,7 @@ class CartController extends Controller
         return view('dashboard.carts.index', compact('carts'));
     } //end of index
 
-    public function create()
+    public function create(): View
     {
         $markets = Market::all();
         $sub_categorys = Sub_Category::all();
@@ -52,7 +54,7 @@ class CartController extends Controller
         return view('dashboard.carts.create', compact('markets', 'sub_categorys', 'carts_details'));
     } //end ofcreate
 
-    public function store(CartRequest $request)
+    public function store(CartRequest $request): RedirectResponse
     {
         $request->validate([
             'cart_details_id' => 'required',
@@ -77,7 +79,7 @@ class CartController extends Controller
 
     } //end of store
 
-    public function edit(Product $cart)
+    public function edit(Product $cart): View
     {
         $markets = Market::all();
         $sub_categorys = Sub_Category::all();
@@ -86,7 +88,7 @@ class CartController extends Controller
         return view('dashboard.carts.edit', compact('markets', 'sub_categorys', 'cart', 'carts_details'));
     } //end of edit
 
-    public function update(CartRequest $request, Product $cart)
+    public function update(CartRequest $request, Product $cart): RedirectResponse
     {
         // dd($request->all());
 
@@ -122,7 +124,7 @@ class CartController extends Controller
 
     } //end of update
 
-    public function destroy(Product $cart)
+    public function destroy(Product $cart): RedirectResponse
     {
 
         $cart->delete();

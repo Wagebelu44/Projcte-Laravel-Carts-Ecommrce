@@ -26,10 +26,8 @@ class EmailVerify extends Mailable
 
     /**
      * Build the message.
-     *
-     * @return $this
      */
-    public function build()
+    public function build(): static
     {
 
         // dd($this->cliant);

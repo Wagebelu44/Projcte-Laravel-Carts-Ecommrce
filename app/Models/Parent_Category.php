@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 
 class parent_category extends Model
@@ -13,7 +14,7 @@ class parent_category extends Model
 
     public $translatable = ['name'];
 
-    public function sub_category()
+    public function sub_category(): HasMany
     {
         return $this->hasMany(\App\Models\Sub_Category::class, 'parent_category_id');
     }

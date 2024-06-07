@@ -8,10 +8,8 @@ class MarketTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $markets = \App\Models\Market::create([
             'user_id' => '1',

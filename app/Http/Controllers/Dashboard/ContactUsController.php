@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ConnectRequests;
 use App\Mail\contact;
 use App\Models\ContactUs;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
 class ContactUsController extends Controller
 {
@@ -38,7 +40,7 @@ class ContactUsController extends Controller
 
     }//end of index
 
-    public function create()
+    public function create(): View
     {
         return view('dashboard.settings.connect_us.create');
     }//end of create
@@ -51,14 +53,14 @@ class ContactUsController extends Controller
         return back()->with('message', 'ticit was added to your ticit soppurt list!!!!');
     }//end of store
 
-    public function edit(ContactUs $contactUs, $id)
+    public function edit(ContactUs $contactUs, $id): View
     {
         $contactUs = ContactUs::find($id);
 
         return view('dashboard.settings.connect_us.edit', compact('contactUs'));
     }//end of edit
 
-    public function update(Request $request, ContactUs $ticit)
+    public function update(Request $request, ContactUs $ticit): RedirectResponse
     {
 
         $answer = ContactUs::where('email', $request->cliant_email)->first();
@@ -77,7 +79,7 @@ class ContactUsController extends Controller
         return redirect()->route('dashboard.connect_us.index');
     }//end of update
 
-    public function destroy(ContactUs $contactUs, $id)
+    public function destroy(ContactUs $contactUs, $id): RedirectResponse
     {
         $contactUs = ContactUs::find($id);
         $contactUs->delete();

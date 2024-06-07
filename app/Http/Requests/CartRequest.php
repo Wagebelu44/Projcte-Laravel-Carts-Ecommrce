@@ -8,15 +8,13 @@ class CartRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         $rules = [
             'cart_details_id' => 'required',
@@ -31,7 +29,7 @@ class CartRequest extends FormRequest
         return $rules;
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             // 'cart_name.required'         => trans('validation.required'),

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\PrivacyPolicy;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class PrivacyPolicyController extends Controller
 {
@@ -31,12 +33,12 @@ class PrivacyPolicyController extends Controller
         return view('dashboard.settings.privacy_policy.index', compact('privacy_policys'));
     }//end of index
 
-    public function create()
+    public function create(): View
     {
         return view('dashboard.settings.privacy_policy.create');
     }//end of create
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         // dd($request->all());
         try {
@@ -58,13 +60,13 @@ class PrivacyPolicyController extends Controller
         }//end try
     }//end of store
 
-    public function edit(PrivacyPolicy $privacyPolicy)
+    public function edit(PrivacyPolicy $privacyPolicy): View
     {
         // $usage_Policy = Usage_Policy::find($id);
         return view('dashboard.settings.privacy_policy.edit', compact('privacyPolicy'));
     }//end of edit
 
-    public function update(Request $request, PrivacyPolicy $privacyPolicy)
+    public function update(Request $request, PrivacyPolicy $privacyPolicy): RedirectResponse
     {
         // $privacyPolicy = PrivacyPolicy::find($id);
         try {
@@ -84,7 +86,7 @@ class PrivacyPolicyController extends Controller
         }//end try
     }//end off update
 
-    public function destroy(PrivacyPolicy $privacyPolicy)
+    public function destroy(PrivacyPolicy $privacyPolicy): RedirectResponse
     {
         // $privacyPolicy = PrivacyPolicy::find($id);
         $privacyPolicy->delete();

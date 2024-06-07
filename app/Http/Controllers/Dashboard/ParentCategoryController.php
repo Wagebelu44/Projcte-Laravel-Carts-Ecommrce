@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ParentCategory;
 use App\Models\Parent_Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class ParentCategoryController extends Controller
 {
@@ -33,13 +35,13 @@ class ParentCategoryController extends Controller
 
     }//end of index
 
-    public function create()
+    public function create(): View
     {
         return view('dashboard.parent_category.create');
 
     }//end of create
 
-    public function store(ParentCategory $request)
+    public function store(ParentCategory $request): RedirectResponse
     {
 
         $parent_categories = $request->all();
@@ -63,13 +65,13 @@ class ParentCategoryController extends Controller
 
     }//end of store
 
-    public function edit(parent_category $parent_category)
+    public function edit(parent_category $parent_category): View
     {
         return view('dashboard.parent_category.edit', compact('parent_category'));
 
     }//end of edit
 
-    public function update(ParentCategory $request, parent_category $parent_category)
+    public function update(ParentCategory $request, parent_category $parent_category): RedirectResponse
     {
         $parent_categories = $request->all();
 
@@ -107,7 +109,7 @@ class ParentCategoryController extends Controller
 
     }//end of update
 
-    public function destroy(parent_category $parent_category)
+    public function destroy(parent_category $parent_category): RedirectResponse
     {
 
         if ($parent_category->image != 'default.png') {

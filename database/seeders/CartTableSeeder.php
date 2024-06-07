@@ -8,10 +8,8 @@ class CartTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $markets = \App\Models\Product::create([
             'users_id' => '1',

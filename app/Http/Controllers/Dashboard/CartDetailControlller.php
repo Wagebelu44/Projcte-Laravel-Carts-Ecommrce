@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CartDetailRequest;
 use App\Models\CartDetail;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class CartDetailControlller extends Controller
 {
@@ -27,13 +29,13 @@ class CartDetailControlller extends Controller
 
     } //end of index
 
-    public function create()
+    public function create(): View
     {
         return view('dashboard.carts_detail.create');
 
     } //end of create
 
-    public function store(CartDetailRequest $request)
+    public function store(CartDetailRequest $request): RedirectResponse
     {
 
         // try {
@@ -60,14 +62,14 @@ class CartDetailControlller extends Controller
 
     } //end of store
 
-    public function edit(CartDetail $cartDetail, $id)
+    public function edit(CartDetail $cartDetail, $id): View
     {
         $cartDetail = CartDetail::find($id);
 
         return view('dashboard.carts_detail.edit', compact('cartDetail'));
     } //end of edit
 
-    public function update(CartDetailRequest $request, CartDetail $cartDetail, $id)
+    public function update(CartDetailRequest $request, CartDetail $cartDetail, $id): RedirectResponse
     {
         $cartDetail = CartDetail::find($id);
 
@@ -112,7 +114,7 @@ class CartDetailControlller extends Controller
 
     } //end of update
 
-    public function destroy(CartDetail $cartDetail, $id)
+    public function destroy(CartDetail $cartDetail, $id): RedirectResponse
     {
         $cartDetail = CartDetail::find($id);
 

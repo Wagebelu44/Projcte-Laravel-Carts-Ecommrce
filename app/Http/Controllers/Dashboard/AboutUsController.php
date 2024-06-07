@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\AbouUs;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AboutUsController extends Controller
 {
@@ -32,12 +34,12 @@ class AboutUsController extends Controller
         return view('dashboard.settings.about_us.index', compact('about_uss'));
     }//end of index
 
-    public function create()
+    public function create(): View
     {
         return view('dashboard.settings.about_us.create');
     }//end of create
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         // dd($request->all());
         try {
@@ -59,14 +61,14 @@ class AboutUsController extends Controller
         }//end try
     }//end of store
 
-    public function edit(AbouUs $abouUs, $id)
+    public function edit(AbouUs $abouUs, $id): View
     {
         $abouUs = AbouUs::find($id);
 
         return view('dashboard.settings.about_us.edit', compact('abouUs'));
     }//end of edit
 
-    public function update(Request $request, AbouUs $abouUs, $id)
+    public function update(Request $request, AbouUs $abouUs, $id): RedirectResponse
     {
         $abouUs = AbouUs::find($id);
         try {
@@ -86,7 +88,7 @@ class AboutUsController extends Controller
         }//end try
     }//end of update
 
-    public function destroy(AbouUs $abouUs, $id)
+    public function destroy(AbouUs $abouUs, $id): RedirectResponse
     {
         $abouUs = AbouUs::find($id);
         $abouUs->delete();

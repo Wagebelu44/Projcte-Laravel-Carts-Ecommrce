@@ -9,11 +9,13 @@ use App\Models\Parent_Category;
 use App\Models\user;
 use App\Rules\MatchOldPassword;
 use Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
 use Intervention\Image\Facades\Image;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -92,7 +94,7 @@ class ProfileController extends Controller
         // return redirect()->back();
     }
 
-    public function show(Cliant $cliants)
+    public function show(Cliant $cliants): View
     {
         $id = Auth::guard('cliants')->user()->id;
         $parent_categories = Parent_Category::with('sub_category')->get();
@@ -139,7 +141,7 @@ class ProfileController extends Controller
 
     }
 
-    public function update(Request $request, Cliant $cliants, $id)
+    public function update(Request $request, Cliant $cliants, $id): RedirectResponse
     {
         // dd($request->all());
         $request->validate([
@@ -196,7 +198,7 @@ class ProfileController extends Controller
         // return redirect()->back();
     } //end of update
 
-    public function logouts()
+    public function logouts(): RedirectResponse
     {
         Auth::guard('cliants')->logout();
 

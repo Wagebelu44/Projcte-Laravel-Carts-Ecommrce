@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Jobs\UpdateCoupon;
 use App\Models\Cupon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CouponsController extends Controller
@@ -23,7 +24,7 @@ class CouponsController extends Controller
             }
             // return response()->json($coupon);
             // dd($coupon);
-            dispatch_now(new UpdateCoupon($coupon));
+            dispatch_sync(new UpdateCoupon($coupon));
 
             // return response()->json($coupon);
             return response()->json(['success' => true]);
@@ -34,7 +35,7 @@ class CouponsController extends Controller
 
     }//end of function
 
-    public function destroy()
+    public function destroy(): JsonResponse
     {
 
         $coupon = session()->forget('coupon');

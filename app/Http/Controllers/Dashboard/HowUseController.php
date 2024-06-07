@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\HowUse;
 use App\Models\Sub_Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HowUseController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $uses = HowUse::all();
 
@@ -17,7 +19,7 @@ class HowUseController extends Controller
 
     }//end of index
 
-    public function create()
+    public function create(): View
     {
         $sub_categorys = Sub_Category::all();
 
@@ -25,7 +27,7 @@ class HowUseController extends Controller
 
     }//end of create
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
 
         try {
@@ -52,7 +54,7 @@ class HowUseController extends Controller
 
     }//end of store
 
-    public function edit($id)
+    public function edit($id): View
     {
         // dd($howUses);
         $HowUses = HowUse::find($id);
@@ -61,7 +63,7 @@ class HowUseController extends Controller
         return view('dashboard.how_to_use.edit', compact('HowUses', 'sub_categorys'));
     }//end of edit
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
         try {
 
@@ -84,7 +86,7 @@ class HowUseController extends Controller
 
     }//end of updaet
 
-    public function destroy(HowUse $howUse, $id)
+    public function destroy(HowUse $howUse, $id): RedirectResponse
     {
         $howUse = HowUse::find($id);
         $howUse->delete();

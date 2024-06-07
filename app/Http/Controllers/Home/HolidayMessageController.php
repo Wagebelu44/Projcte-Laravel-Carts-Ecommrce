@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Jobs\HolidayMessageJob;
 use App\Models\HolidayMessage;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HolidayMessageController extends Controller
 {
@@ -22,7 +24,7 @@ class HolidayMessageController extends Controller
 
     }
 
-    public function create()
+    public function create(): View
     {
 
         $emails = HolidayMessage::latest()->get();
@@ -31,7 +33,7 @@ class HolidayMessageController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
 
         $emails = HolidayMessage::latest()->get();

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CuponRequest;
 use App\Models\Cupon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CuponController extends Controller
 {
@@ -33,12 +35,12 @@ class CuponController extends Controller
         return view('dashboard.cupons.index', compact('cupons'));
     }//end of index
 
-    public function create()
+    public function create(): View
     {
         return view('dashboard.cupons.create');
     }//end of create
 
-    public function store(CuponRequest $request)
+    public function store(CuponRequest $request): RedirectResponse
     {
 
         try {
@@ -55,12 +57,12 @@ class CuponController extends Controller
 
     }//end of store
 
-    public function edit(cupon $cupon)
+    public function edit(cupon $cupon): View
     {
         return view('dashboard.cupons.edit', compact('cupon'));
     }//end of edit
 
-    public function update(CuponRequest $request, cupon $cupon)
+    public function update(CuponRequest $request, cupon $cupon): RedirectResponse
     {
         try {
 
@@ -75,7 +77,7 @@ class CuponController extends Controller
         }//end try
     }//end of update
 
-    public function destroy(cupon $cupon)
+    public function destroy(cupon $cupon): RedirectResponse
     {
         $cupon->delete();
         notify()->success(__('home.deleted_successfully'));

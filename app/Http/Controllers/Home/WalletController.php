@@ -8,11 +8,13 @@ use App\Models\Product;
 use App\Models\WalletDatabase;
 use Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class WalletController extends Controller
 {
-    public function index()
+    public function index(): View
     {
 
         if (session()->get('rate') == null) {
@@ -128,7 +130,7 @@ class WalletController extends Controller
         // return back()->with('success_message', 'Item was added to your cart!!!!');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): JsonResponse
     {
         // $validator = Validator::make($request->all(), [
         //     'quantity' => 'required|numeric'
@@ -164,7 +166,7 @@ class WalletController extends Controller
         // return back()->withSuccess('secess delete');
     }
 
-    public function IncDes(Request $request, $id)
+    public function IncDes(Request $request, $id): JsonResponse
     {
 
         $a = Cart::update($id, $request->quantity);

@@ -12,8 +12,10 @@ use App\Models\PayCurrencie;
 use App\Models\Product;
 use App\Models\Purchase;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
@@ -132,10 +134,8 @@ class OrderController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
 
         if (session()->get('rate') == null) {
@@ -330,9 +330,8 @@ class OrderController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
      */
-    public function complete()
+    public function complete(): View
     {
 
         $random_carts = Product::inRandomOrder()->paginate(10);
@@ -343,7 +342,7 @@ class OrderController extends Controller
 
     }
 
-    public function my_purchase()
+    public function my_purchase(): View
     {
 
         $parent_categories = Parent_Category::with('sub_category')->get();
@@ -354,7 +353,7 @@ class OrderController extends Controller
 
     }
 
-    public function purchase_details($number)
+    public function purchase_details($number): View
     {
 
         $parent_categories = Parent_Category::with('sub_category')->get();
@@ -374,7 +373,7 @@ class OrderController extends Controller
 
     }
 
-    public function purchase_invoices($number)
+    public function purchase_invoices($number): View
     {
 
         $purchases = Purchase::where('number', $number)->get();
@@ -427,7 +426,7 @@ class OrderController extends Controller
 
     }
 
-    public function purchase_delete(Purchase $order)
+    public function purchase_delete(Purchase $order): RedirectResponse
     {
 
         $order->delete();
@@ -477,9 +476,8 @@ class OrderController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(CartStore $cartStore)
+    public function destroy(CartStore $cartStore): RedirectResponse
     {
         $cartStore->delete();
         notify()->success(__('home.deleted_successfully'));

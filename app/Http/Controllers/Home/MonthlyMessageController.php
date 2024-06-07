@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Jobs\MonthlyMessageJob;
 use App\Models\MonthlyMessage;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class MonthlyMessageController extends Controller
 {
@@ -22,7 +24,7 @@ class MonthlyMessageController extends Controller
 
     }
 
-    public function create()
+    public function create(): View
     {
 
         $emails = MonthlyMessage::latest()->get();
@@ -31,7 +33,7 @@ class MonthlyMessageController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
 
         $emails = MonthlyMessage::latest()->get();

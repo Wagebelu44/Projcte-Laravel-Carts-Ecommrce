@@ -10,12 +10,14 @@ use App\Models\Sub_Category;
 use App\Models\WalletDatabase;
 use App\Purchase;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class PurchaseController extends Controller
 {
-    public function index()
+    public function index(): View
     {
 
         if (session()->get('rate') == null) {
@@ -41,7 +43,7 @@ class PurchaseController extends Controller
         return response()->json($sub_category);
     } //end of create
 
-    public function sub_categoryed($id)
+    public function sub_categoryed($id): JsonResponse
     {
         $marketd = Market::where('id', $id)->get();
 

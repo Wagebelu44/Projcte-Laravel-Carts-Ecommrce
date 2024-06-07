@@ -8,10 +8,8 @@ class SubCategoryTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $sub_category = \App\Models\Sub_Category::create([
             'user_id' => '1',

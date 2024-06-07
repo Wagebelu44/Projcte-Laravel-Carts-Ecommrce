@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\ReturnPolicy;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ReturnPolicyController extends Controller
 {
@@ -31,12 +33,12 @@ class ReturnPolicyController extends Controller
         return view('dashboard.settings.return_policy.index', compact('return_policys'));
     }//end of index
 
-    public function create()
+    public function create(): View
     {
         return view('dashboard.settings.return_policy.create');
     }//end of create
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         // dd($request->all());
         try {
@@ -59,12 +61,12 @@ class ReturnPolicyController extends Controller
 
     }//end of store
 
-    public function edit(ReturnPolicy $returnPolicy)
+    public function edit(ReturnPolicy $returnPolicy): View
     {
         return view('dashboard.settings.return_policy.edit', compact('returnPolicy'));
     }//end of edit
 
-    public function update(Request $request, ReturnPolicy $returnPolicy)
+    public function update(Request $request, ReturnPolicy $returnPolicy): RedirectResponse
     {
         // $returnPolicy = ReturnPolicy::find($id);
         try {
@@ -84,7 +86,7 @@ class ReturnPolicyController extends Controller
         }//end try
     }//end of update
 
-    public function destroy(ReturnPolicy $returnPolicy)
+    public function destroy(ReturnPolicy $returnPolicy): RedirectResponse
     {
         // $returnPolicy = ReturnPolicy::find($id);
         $returnPolicy->delete();

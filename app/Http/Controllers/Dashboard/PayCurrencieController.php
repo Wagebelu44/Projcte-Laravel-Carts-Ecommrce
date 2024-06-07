@@ -6,24 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Mail\PandingCart;
 use App\Models\PayCurrencie;
 use App\Models\Purchase;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
 class PayCurrencieController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $pay_currencie = PayCurrencie::all();
 
         return view('dashboard.pay_currencie.index', compact('pay_currencie'));
     } //endof index
 
-    public function edit(PayCurrencie $payCurrencie)
+    public function edit(PayCurrencie $payCurrencie): View
     {
         return view('dashboard.pay_currencie.edit', compact('payCurrencie'));
     } //end of edit
 
-    public function update(Request $request, PayCurrencie $payCurrencie)
+    public function update(Request $request, PayCurrencie $payCurrencie): RedirectResponse
     {
         $request->validate([
             'link' => 'required',
@@ -59,7 +61,7 @@ class PayCurrencieController extends Controller
         }
     } //end of update
 
-    public function pending_requests()
+    public function pending_requests(): View
     {
         $pending_requests = Purchase::where('status', 1)
             ->select('number', 'newTotalwithTax', 'purchases_status', 'date')
@@ -69,7 +71,7 @@ class PayCurrencieController extends Controller
         return view('dashboard.pending_requests.index', compact('pending_requests'));
     }
 
-    public function pending_requests_edit($number)
+    public function pending_requests_edit($number): RedirectResponse
     {
         $pending_requests = Purchase::where('status', 1)->where('number', $number)->get();
 
@@ -89,7 +91,7 @@ class PayCurrencieController extends Controller
         return redirect()->route('dashboard.pending_requests');
     }
 
-    public function not_exept($number)
+    public function not_exept($number): RedirectResponse
     {
 
         $pending_requests = Purchase::where('status', 1)->where('number', $number)->get();
@@ -108,7 +110,7 @@ class PayCurrencieController extends Controller
 
     }
 
-    public function pay_currencie_details($number)
+    public function pay_currencie_details($number): View
     {
 
         $purchases = Purchase::where('number', $number)->get();

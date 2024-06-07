@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\bcrypt;
@@ -57,7 +58,7 @@ class Cliant extends Authenticatable
 
     }//end of get image path
 
-    public function ticit()
+    public function ticit(): HasMany
     {
         return $this->hasMany(\App\Models\SupportCart::class);
     }

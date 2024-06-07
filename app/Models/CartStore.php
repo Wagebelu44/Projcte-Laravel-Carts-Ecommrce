@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Translatable\HasTranslations;
 
 class CartStore extends Model
@@ -15,19 +16,19 @@ class CartStore extends Model
 
     public $translatable = ['cart_name'];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(\App\Models\User::class, 'users_id');
     }
 
-    public function sub_category()
+    public function sub_category(): BelongsTo
     {
 
         return $this->belongsTo(\App\Models\Sub_Category::class, 'sub_category_id');
 
     }
 
-    public function cart()
+    public function cart(): BelongsTo
     {
         return $this->belongsTo(\App\Models\Product::class, 'products_id');
     }

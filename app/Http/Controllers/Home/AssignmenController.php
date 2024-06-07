@@ -6,15 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Cliant;
 use App\Models\Parent_Category;
 use App\Models\Product;
+use Illuminate\View\View;
 
 class AssignmenController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index($assign)
+    public function index($assign): View
     {
 
         $parent_categories = Parent_Category::with('sub_category')->get();
@@ -75,7 +74,7 @@ class AssignmenController extends Controller
         return view('home.welcome', compact('parent_categories', 'carts'));
     }
 
-    public function get()
+    public function get(): View
     {
 
         if (! \Auth::guard('cliants')->user() == null) {
