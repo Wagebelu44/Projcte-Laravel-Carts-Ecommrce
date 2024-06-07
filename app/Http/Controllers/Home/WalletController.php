@@ -80,7 +80,7 @@ class WalletController extends Controller
         }
 
         $carts = Cart::add($carts->id, $carts->cart_details->cart_name, 1, $carts->amrecan_price)
-            ->associate('App\Models\Product');
+            ->associate(\App\Models\Product::class);
 
         return response()->json($carts);
 
@@ -121,7 +121,7 @@ class WalletController extends Controller
         }
 
         $carts = Cart::add($carts->id, $carts->cart_name, 1, $carts->amrecan_price)
-            ->associate('App\Models\Product');
+            ->associate(\App\Models\Product::class);
 
         return redirect()->route('payment');
 

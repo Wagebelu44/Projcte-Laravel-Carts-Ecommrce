@@ -59,7 +59,7 @@ class Cliant extends Authenticatable
 
     public function ticit()
     {
-        return $this->hasMany('App\Models\SupportCart');
+        return $this->hasMany(\App\Models\SupportCart::class);
     }
 
     // public function setPasswordAttribute($password)

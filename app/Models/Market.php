@@ -18,20 +18,20 @@ class Market extends Model
     public function user()
     {
 
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(\App\Models\User::class);
 
     }
 
     public function Product()
     {
 
-        return $this->hasMany('App\Models\Product', 'market_id');
+        return $this->hasMany(\App\Models\Product::class, 'market_id');
 
     }
 
     public function subcategory()
     {
-        return $this->belongsTo('App\Models\Sub_Category', 'sub_categories_id');
+        return $this->belongsTo(\App\Models\Sub_Category::class, 'sub_categories_id');
     }
 
     public function getImagePathAttribute()

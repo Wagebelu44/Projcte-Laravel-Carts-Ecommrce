@@ -104,7 +104,7 @@ class WelcomeController extends Controller
                         }
 
                         Cart::add($dd->id, $dd->cart_details->cart_name, 1, $dd->amrecan_price)
-                            ->associate('App\Models\Product');
+                            ->associate(\App\Models\Product::class);
 
                     }
 

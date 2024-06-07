@@ -18,7 +18,7 @@ class HowUse extends Model
     public function sub_category()
     {
 
-        return $this->belongsTo('App\Models\Sub_Category', 'sub_categorys_id');
+        return $this->belongsTo(\App\Models\Sub_Category::class, 'sub_categorys_id');
 
     }
 }//end of model

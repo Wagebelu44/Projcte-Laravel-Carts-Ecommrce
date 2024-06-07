@@ -15,7 +15,7 @@ class SupportCart extends Model
 
     public function cliant()
     {
-        return $this->belongsTo('App\Models\Cliant');
+        return $this->belongsTo(\App\Models\Cliant::class);
     }
 
     public function getImagePathAttribute()

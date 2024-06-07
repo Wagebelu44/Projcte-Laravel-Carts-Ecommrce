@@ -91,7 +91,7 @@ class PurchaseController extends Controller
         }
 
         $carts = Cart::add($request->cart_id, $request->cart_name, 1, $request->amrecan_price)
-            ->associate('App\Models\Product');
+            ->associate(\App\Models\Product::class);
 
         // dd($carts);
         return redirect()->route('payment');

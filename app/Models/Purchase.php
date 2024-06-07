@@ -24,13 +24,13 @@ class Purchase extends Model
     public function sub_category()
     {
 
-        return $this->belongsTo('App\Models\Sub_Category', 'sub_category_id');
+        return $this->belongsTo(\App\Models\Sub_Category::class, 'sub_category_id');
 
     }//end of sub_category
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'users_id');
+        return $this->belongsTo(\App\Models\User::class, 'users_id');
     }//end of users
 
 }//end of models

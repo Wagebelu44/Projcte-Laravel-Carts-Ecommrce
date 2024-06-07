@@ -15,7 +15,7 @@ class parent_category extends Model
 
     public function sub_category()
     {
-        return $this->hasMany('App\Models\Sub_Category', 'parent_category_id');
+        return $this->hasMany(\App\Models\Sub_Category::class, 'parent_category_id');
     }
 
     public function getImagePathAttribute()

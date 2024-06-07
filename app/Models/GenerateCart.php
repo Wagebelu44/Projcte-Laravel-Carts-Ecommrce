@@ -16,21 +16,21 @@ class GenerateCart extends Model
     public function user()
     {
 
-        return $this->belongsTo('App\Models\User', 'users_id');
+        return $this->belongsTo(\App\Models\User::class, 'users_id');
 
     }
 
     public function sub_category()
     {
 
-        return $this->belongsTo('App\Models\Sub_Category', 'sub_category_id');
+        return $this->belongsTo(\App\Models\Sub_Category::class, 'sub_category_id');
 
     }
 
     public function Market()
     {
 
-        return $this->belongsTo('App\Models\Market', 'market_id');
+        return $this->belongsTo(\App\Models\Market::class, 'market_id');
 
     }
 }//end of model
