@@ -23,7 +23,7 @@ class CouponsController extends Controller
             }
             // return response()->json($coupon);
             // dd($coupon);
-            dispatch_now(new UpdateCoupon($coupon));
+            dispatch_sync(new UpdateCoupon($coupon));
 
             // return response()->json($coupon);
             return response()->json(['success' => true]);
