@@ -79,8 +79,6 @@ class GenerateCartController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create(): View
     {
@@ -92,9 +90,6 @@ class GenerateCartController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(GenerateCartRequest $request): RedirectResponse
     {
@@ -166,9 +161,6 @@ class GenerateCartController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function update(GenerateCartRequest $request, GenerateCart $generateCart): RedirectResponse
     {
@@ -200,8 +192,6 @@ class GenerateCartController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function destroy(GenerateCart $generateCart): RedirectResponse
     {

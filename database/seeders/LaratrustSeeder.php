@@ -11,8 +11,6 @@ class LaratrustSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {
@@ -77,8 +75,6 @@ class LaratrustSeeder extends Seeder
 
     /**
      * Truncates all the laratrust tables and the users table
-     *
-     * @return void
      */
     public function truncateLaratrustTables(): void
     {
