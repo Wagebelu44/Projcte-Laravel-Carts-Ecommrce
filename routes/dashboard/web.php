@@ -1,7 +1,6 @@
 <?php
 
-Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']],
-    function () {
+Route::prefix(LaravelLocalization::setLocale())->middleware('localeSessionRedirect', 'localizationRedirect', 'localeViewPath')->group(function () {
 
         Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(function () {
 

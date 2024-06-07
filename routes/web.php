@@ -2,13 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(
-    [
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
-    ], function () { //...
+Route::prefix(LaravelLocalization::setLocale())->middleware('localeSessionRedirect', 'localizationRedirect', 'localeViewPath')->group(function () { //...
 
-        Route::group(['namespace' => 'Home'], function () {
+        Route::namespace('Home')->group(function () {
 
             Route::get('/dd', function () {
                 return 'true';
