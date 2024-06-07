@@ -17,7 +17,7 @@ class CreateHowUsesTable extends Migration
             $table->bigIncrements('id');
             $table->longText('description');
 
-            $table->bigInteger('sub_categorys_id')->unsigned(); 
+            $table->bigInteger('sub_categorys_id')->unsigned();
 
             $table->foreign('sub_categorys_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->timestamps();

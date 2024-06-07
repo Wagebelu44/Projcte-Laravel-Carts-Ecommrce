@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
@@ -12,16 +11,13 @@ class User extends Authenticatable
     use LaratrustUserTrait;
     use Notifiable;
 
-
     protected $fillable = [
-        'name', 'email', 'password','image' ,'phone'
+        'name', 'email', 'password', 'image', 'phone',
     ];
-
 
     protected $hidden = [
         'password', 'remember_token',
     ];
-
 
     protected $casts = [
         'email_verified_at' => 'datetime',
@@ -31,7 +27,7 @@ class User extends Authenticatable
 
     public function getImagePathAttribute()
     {
-        return asset('uploads/user_images/' . $this->image);
+        return asset('uploads/user_images/'.$this->image);
 
     }//end of get image path
 
@@ -39,5 +35,4 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\cupon');
     }
-
 }//end of models

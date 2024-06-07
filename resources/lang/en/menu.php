@@ -2,7 +2,6 @@
 
 return [
 
- 
     'users' => 'users',
     'dashboard' => 'Dashboard',
     'about' => 'about me ',

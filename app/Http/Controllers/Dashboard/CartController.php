@@ -4,16 +4,14 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CartRequest;
+use App\Models\CartDetail;
 use App\Models\Market;
 use App\Models\Product;
-use App\Models\Notify;
 use App\Models\Sub_Category;
-use App\Models\CartDetail;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-
     public function __construct()
     {
         //create read update delete
@@ -30,15 +28,15 @@ class CartController extends Controller
         $carts = Product::when($request->search, function ($q) use ($request) {
 
             // return $q->HasTranslations('name', '%' . $request->search . '%');
-            return $q->where('users_id', 'like', '%' . $request->search . '%')
-                ->orWhere('cart_name->ar', 'like', '%' . $request->search . '%')
-                ->orWhere('cart_name->en', 'like', '%' . $request->search . '%')
-                ->orWhere('cart_text->ar', 'like', '%' . $request->search . '%')
-                ->orWhere('cart_text->en', 'like', '%' . $request->search . '%')
-                ->orWhere('short_descript->ar', 'like', '%' . $request->search . '%')
-                ->orWhere('short_descript->en', 'like', '%' . $request->search . '%')
-                ->orWhere('amrecan_price', 'like', '%' . $request->search . '%')
-                ->orWhere('balance', 'like', '%' . $request->search . '%');
+            return $q->where('users_id', 'like', '%'.$request->search.'%')
+                ->orWhere('cart_name->ar', 'like', '%'.$request->search.'%')
+                ->orWhere('cart_name->en', 'like', '%'.$request->search.'%')
+                ->orWhere('cart_text->ar', 'like', '%'.$request->search.'%')
+                ->orWhere('cart_text->en', 'like', '%'.$request->search.'%')
+                ->orWhere('short_descript->ar', 'like', '%'.$request->search.'%')
+                ->orWhere('short_descript->en', 'like', '%'.$request->search.'%')
+                ->orWhere('amrecan_price', 'like', '%'.$request->search.'%')
+                ->orWhere('balance', 'like', '%'.$request->search.'%');
 
         })->latest()->paginate(10);
 
@@ -47,10 +45,11 @@ class CartController extends Controller
 
     public function create()
     {
-        $markets       = Market::all();
+        $markets = Market::all();
         $sub_categorys = Sub_Category::all();
         $carts_details = CartDetail::all();
-        return view('dashboard.carts.create', compact('markets', 'sub_categorys','carts_details'));
+
+        return view('dashboard.carts.create', compact('markets', 'sub_categorys', 'carts_details'));
     } //end ofcreate
 
     public function store(CartRequest $request)
@@ -58,17 +57,18 @@ class CartController extends Controller
         $request->validate([
             'cart_details_id' => 'required',
             'sub_category_id' => 'required',
-            'balance'         => 'required',
-            'rating'          => 'required',
-            'stars'           => 'required',
-            'amrecan_price'   => 'required',
+            'balance' => 'required',
+            'rating' => 'required',
+            'stars' => 'required',
+            'amrecan_price' => 'required',
         ]);
-        
+
         $request['users_id'] = auth()->id();
 
         Product::create($request->all());
 
         notify()->success(__('home.added_successfully'));
+
         return redirect()->route('dashboard.carts.index');
 
         // } catch (\Exception $e) {
@@ -79,10 +79,11 @@ class CartController extends Controller
 
     public function edit(Product $cart)
     {
-        $markets       = Market::all();
+        $markets = Market::all();
         $sub_categorys = Sub_Category::all();
         $carts_details = CartDetail::all();
-        return view('dashboard.carts.edit', compact('markets', 'sub_categorys', 'cart','carts_details'));
+
+        return view('dashboard.carts.edit', compact('markets', 'sub_categorys', 'cart', 'carts_details'));
     } //end of edit
 
     public function update(CartRequest $request, Product $cart)
@@ -92,26 +93,27 @@ class CartController extends Controller
         $request->validate([
             'cart_details_id' => 'required',
             'sub_category_id' => 'required',
-            'balance'         => 'required',
-            'rating'          => 'required',
-            'stars'           => 'required',
-            'amrecan_price'   => 'required',
+            'balance' => 'required',
+            'rating' => 'required',
+            'stars' => 'required',
+            'amrecan_price' => 'required',
         ]);
 
         $cart->update([
 
             'cart_details_id' => $request->cart_details_id,
-            'users_id'        => auth()->user()->id,
-            'market_id'       => $request->market_id,
+            'users_id' => auth()->user()->id,
+            'market_id' => $request->market_id,
             'sub_category_id' => $request->sub_category_id,
-            'balance'         => $request->balance,
-            'rating'          => $request->rating,
-            'stars'           => $request->stars,
-            'amrecan_price'   => $request->amrecan_price,
+            'balance' => $request->balance,
+            'rating' => $request->rating,
+            'stars' => $request->stars,
+            'amrecan_price' => $request->amrecan_price,
 
         ]);
 
         notify()->success(__('home.updated_successfully'));
+
         return redirect()->route('dashboard.carts.index');
 
         // } catch (\Exception $e) {
@@ -125,6 +127,7 @@ class CartController extends Controller
 
         $cart->delete();
         notify()->success(__('home.deleted_successfully'));
+
         return redirect()->route('dashboard.carts.index');
 
     } //end of destroy

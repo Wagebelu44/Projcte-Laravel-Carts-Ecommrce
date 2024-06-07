@@ -14,9 +14,8 @@ return [
     |
     */
 
-   'theme' => env('NOTIFY_THEME', null),
+    'theme' => env('NOTIFY_THEME', null),
     // 'theme' => env('NOTIFY_THEME', 'dark'),
-
 
     /*
     |--------------------------------------------------------------------------
@@ -40,9 +39,9 @@ return [
     */
 
     'animate' => [
-        'in_class'  => 'bounceInRight', // The class to use to animate the notice in.
+        'in_class' => 'bounceInRight', // The class to use to animate the notice in.
         'out_class' => 'bounceOutRight', // The class to use to animate the notice out.
-        'timeout'   => 15000, // Number of seconds before the notice disappears
+        'timeout' => 15000, // Number of seconds before the notice disappears
     ],
 
     /*
@@ -81,26 +80,26 @@ return [
         // An example preset 'user updated' Connectify notification.
         'user-updated' => [
             'message' => 'The user has been updated successfully.',
-            'type'    => 'success',
-            'icon'    => 'flaticon2-check-mark',
-            'model'   => 'connect',
-            'title'   => 'User Updated',
+            'type' => 'success',
+            'icon' => 'flaticon2-check-mark',
+            'model' => 'connect',
+            'title' => 'User Updated',
         ],
 
         'user-deleted' => [
             'message' => 'The user has been deleted successfully.',
-            'type'    => 'success',
-            'model'   => 'connect',
-            'title'   => 'User Deleted',
+            'type' => 'success',
+            'model' => 'connect',
+            'title' => 'User Deleted',
         ],
 
         'user-added' => [
             'message' => 'The user has been added successfully.',
-            'type'    => 'added',
-            'model'   => 'connect',
-            'title'   => 'User Added',
+            'type' => 'added',
+            'model' => 'connect',
+            'title' => 'User Added',
         ],
 
-    ],//preset-messages
+    ], //preset-messages
 
 ];

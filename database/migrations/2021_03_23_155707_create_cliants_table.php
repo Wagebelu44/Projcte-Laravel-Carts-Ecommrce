@@ -24,7 +24,7 @@ class CreateCliantsTable extends Migration
             $table->integer('isVerified')->default(0);
             $table->integer('emailVerified')->default(0);
 
-            // Socialite 
+            // Socialite
             $table->string('provider')->nullable();
             $table->string('stars')->nullable();
             $table->string('provider_id')->nullable();

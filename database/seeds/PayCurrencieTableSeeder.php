@@ -11,13 +11,13 @@ class PayCurrencieTableSeeder extends Seeder
      */
     public function run()
     {
-        $links = ['Bitcoin', 'Dogecoin','Etherum','usdt'];
+        $links = ['Bitcoin', 'Dogecoin', 'Etherum', 'usdt'];
 
         foreach ($links as $link) {
 
             \App\Models\PayCurrencie::create([
-               'name' => $link,
-               'link' => '#',
+                'name' => $link,
+                'link' => '#',
             ]);
 
         }//end of foreach

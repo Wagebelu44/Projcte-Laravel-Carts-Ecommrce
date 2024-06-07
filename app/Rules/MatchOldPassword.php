@@ -3,8 +3,8 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 // use Auth;
 // use App\Rules\Auth;
@@ -29,7 +29,7 @@ class MatchOldPassword implements Rule
      * @return bool
      */
     public function passes($attribute, $value)
-    {   
+    {
         return Hash::check($value, Auth::guard('cliants')->user()->password);
     }
 

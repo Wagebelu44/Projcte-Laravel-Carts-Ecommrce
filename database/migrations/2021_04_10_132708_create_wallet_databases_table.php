@@ -22,10 +22,10 @@ class CreateWalletDatabasesTable extends Migration
             $table->text('image');
             $table->bigInteger('users_id');
             $table->double('amrecan_price');
-            $table->bigInteger('market_id')->unsigned();        
-            $table->bigInteger('sub_category_id')->unsigned();    
+            $table->bigInteger('market_id')->unsigned();
+            $table->bigInteger('sub_category_id')->unsigned();
             $table->foreign('market_id')->references('id')->on('markets')->onDelete('cascade');
-            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');    
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

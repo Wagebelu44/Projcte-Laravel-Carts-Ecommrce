@@ -21,8 +21,8 @@ class CreateCartStoresTable extends Migration
             $table->string('user_name')->default('null');
             $table->integer('users_id');
             $table->integer('cliant_id')->default(0);
-            $table->bigInteger('sub_category_id')->unsigned();        
-            $table->bigInteger('products_id')->unsigned(); 
+            $table->bigInteger('sub_category_id')->unsigned();
+            $table->bigInteger('products_id')->unsigned();
             $table->foreign('products_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });

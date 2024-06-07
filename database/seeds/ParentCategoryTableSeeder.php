@@ -12,27 +12,27 @@ class ParentCategoryTableSeeder extends Seeder
     public function run()
     {
         $parent_category = \App\Models\Parent_Category::create([
-            'name' => ['ar'=> 'متاجر رثقميه', 'en' => 'testing'],
+            'name' => ['ar' => 'متاجر رثقميه', 'en' => 'testing'],
         ]);
 
         $parent_category = \App\Models\Parent_Category::create([
-            'name' => "نصات العاب",
+            'name' => 'نصات العاب',
         ]);
 
         $parent_category = \App\Models\Parent_Category::create([
-            'name' => "بطاقات اتصلات",
+            'name' => 'بطاقات اتصلات',
         ]);
 
         $parent_category = \App\Models\Parent_Category::create([
-            'name' => "بطاقات بينات",
+            'name' => 'بطاقات بينات',
         ]);
 
         $parent_category = \App\Models\Parent_Category::create([
-            'name' => "بطاقات تسوق",
+            'name' => 'بطاقات تسوق',
         ]);
 
         $parent_category = \App\Models\Parent_Category::create([
-            'name' => "خدمات واشتراكات",
+            'name' => 'خدمات واشتراكات',
         ]);
     }
 }

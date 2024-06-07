@@ -57,20 +57,8 @@ return [
 
         'public_uploads' => [
             'driver' => 'local',
-            'root' => public_path('uploads/market'),
-        ],
-
-       'public_uploads' => [
-            'driver' => 'local',
-            'root' => public_path('uploads/user_images'),
-        ],
-
-        'public_uploads' => [
-            'driver' => 'local',
             'root' => public_path('uploads/categories'),
         ],
-
-       
 
         's3' => [
             'driver' => 's3',
@@ -79,8 +67,24 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
+            'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Symbolic Links
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the symbolic links that will be created when the
+    | `storage:link` Artisan command is executed. The array keys should be
+    | the locations of the links and the values should be their targets.
+    |
+    */
+
+    'links' => [
+        public_path('storage') => storage_path('app/public'),
     ],
 
 ];

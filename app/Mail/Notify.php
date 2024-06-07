@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -11,11 +10,11 @@ class Notify extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $cliants;
 
-    public $cliants,$product;
-   
-    
-    public function __construct($cliants,$product)
+    public $product;
+
+    public function __construct($cliants, $product)
     {
         $this->cliants = $cliants;
         $this->product = $product;
@@ -37,8 +36,8 @@ class Notify extends Mailable
         $product = $this->product;
 
         return $this->to($this->cliants->email)
-                    ->bcc('majalstore@gmail.com')
-                    ->subject('majal store')
-                    ->markdown('emails.Notify');
+            ->bcc('majalstore@gmail.com')
+            ->subject('majal store')
+            ->markdown('emails.Notify');
     }
 }

@@ -12,5 +12,4 @@ class PrivacyPolicy extends Model
     protected $guarded = [];
 
     public $translatable = ['text'];
-
 }//end of models

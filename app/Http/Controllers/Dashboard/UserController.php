@@ -11,7 +11,6 @@ use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
-
     public function __construct()
     {
         //create read update delete
@@ -28,8 +27,8 @@ class UserController extends Controller
 
             return $q->when($request->search, function ($query) use ($request) {
 
-                return $query->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('email', 'like', '%' . $request->search . '%');
+                return $query->where('name', 'like', '%'.$request->search.'%')
+                    ->orWhere('email', 'like', '%'.$request->search.'%');
 
             });
 
@@ -39,23 +38,21 @@ class UserController extends Controller
 
     }//end of index
 
-    public
-    function create()
+    public function create()
     {
         return view('dashboard.users.create');
 
     }//end of create
 
-    public
-    function store(Request $request)
+    public function store(Request $request)
     {
         //dd($request->all());
         $request->validate([
-            'name'        => 'required',
-            'email'       => 'required|unique:users',
-            'image'       => 'image',
-            'password'    => 'required|confirmed',
-            'permissions' => 'required|min:1'
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'image' => 'image',
+            'password' => 'required|confirmed',
+            'permissions' => 'required|min:1',
         ]);
 
         $request_data = $request->except(['password', 'password_confirmation', 'permissions', 'image']);
@@ -67,7 +64,7 @@ class UserController extends Controller
                 ->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(public_path('uploads/user_images/' . $request->image->hashName()));
+                ->save(public_path('uploads/user_images/'.$request->image->hashName()));
 
             $request_data['image'] = $request->image->hashName();
 
@@ -78,25 +75,24 @@ class UserController extends Controller
         $user->syncPermissions($request->permissions);
 
         notify()->success(__('home.added_successfully'));
+
         return redirect()->route('dashboard.users.index');
 
     }//end of store
 
-    public
-    function edit(User $user)
+    public function edit(User $user)
     {
         return view('dashboard.users.edit', compact('user'));
 
     }//end of user
 
-    public
-    function update(Request $request, User $user)
+    public function update(Request $request, User $user)
     {
         $request->validate([
-            'name'        => 'required',
-            'email'       => ['required', Rule::unique('users')->ignore($user->id),],
-            'image'       => 'image',
-            'permissions' => 'required|min:1'
+            'name' => 'required',
+            'email' => ['required', Rule::unique('users')->ignore($user->id)],
+            'image' => 'image',
+            'permissions' => 'required|min:1',
         ]);
 
         $request_data = $request->except(['permissions', 'image']);
@@ -105,7 +101,7 @@ class UserController extends Controller
 
             if ($user->image != 'default.png') {
 
-                Storage::disk('public_uploads')->delete('/user_images/' . $user->image);
+                Storage::disk('public_uploads')->delete('/user_images/'.$user->image);
 
             }//end of inner if
 
@@ -113,7 +109,7 @@ class UserController extends Controller
                 ->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(public_path('uploads/user_images/' . $request->image->hashName()));
+                ->save(public_path('uploads/user_images/'.$request->image->hashName()));
 
             $request_data['image'] = $request->image->hashName();
 
@@ -124,21 +120,22 @@ class UserController extends Controller
         $user->syncPermissions($request->permissions);
 
         notify()->success(__('home.updated_successfully'));
+
         return redirect()->route('dashboard.users.index');
 
     }//end of update
 
-    public
-    function destroy(User $user)
+    public function destroy(User $user)
     {
         if ($user->image != 'default.png') {
 
-            Storage::disk('public_uploads')->delete('/user_images/' . $user->image);
+            Storage::disk('public_uploads')->delete('/user_images/'.$user->image);
 
         }//end of if
 
         $user->delete();
         notify()->success(__('home.deleted_successfully'));
+
         return redirect()->route('dashboard.users.index');
 
     }//end of destroy

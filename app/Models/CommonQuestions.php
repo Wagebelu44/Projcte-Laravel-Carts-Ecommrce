@@ -7,9 +7,9 @@ use Spatie\Translatable\HasTranslations;
 
 class CommonQuestions extends Model
 {
-	use HasTranslations;
+    use HasTranslations;
 
     protected $guarded = [];
 
-    public $translatable = ['common','questions'];
+    public $translatable = ['common', 'questions'];
 }

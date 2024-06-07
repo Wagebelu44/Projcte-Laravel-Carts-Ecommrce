@@ -3,17 +3,15 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-
-
 
 class contact extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $ticit;
+
     /**
      * Create a new message instance.
      *
@@ -21,7 +19,7 @@ class contact extends Mailable
      */
     public function __construct($ticit)
     {
-        
+
         $this->ticit = $ticit;
     }
 
@@ -34,8 +32,8 @@ class contact extends Mailable
     {
         // dd($this->ticit->email);
         return $this->to($this->ticit[0])
-                    ->bcc('another@another.com')
-                    ->subject('majal store')
-                    ->markdown('emails.contact');
+            ->bcc('another@another.com')
+            ->subject('majal store')
+            ->markdown('emails.contact');
     }
 }

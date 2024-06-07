@@ -24,13 +24,13 @@ class CreateCartsTable extends Migration
             $table->double('count_of_buy')->default('0');
             $table->double('amrecan_price');
 
-            $table->integer('market_id')->nullable();        
+            $table->integer('market_id')->nullable();
             $table->bigInteger('users_id');
 
-            $table->bigInteger('cart_details_id')->unsigned();        
+            $table->bigInteger('cart_details_id')->unsigned();
             $table->foreign('cart_details_id')->references('id')->on('cart_details')->onDelete('cascade');
 
-            $table->bigInteger('sub_category_id')->unsigned();        
+            $table->bigInteger('sub_category_id')->unsigned();
             $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->timestamps();
         });

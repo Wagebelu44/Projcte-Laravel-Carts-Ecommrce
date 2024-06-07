@@ -12,36 +12,36 @@ class Market extends Model
     protected $guarded = [];
 
     public $translatable = ['name'];
-    
+
     protected $appends = ['image_path'];
 
     public function user()
     {
 
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(\App\Models\User::class);
 
     }
 
     public function Product()
     {
 
-        return $this->hasMany('App\Models\Product', 'market_id');
+        return $this->hasMany(\App\Models\Product::class, 'market_id');
 
     }
 
     public function subcategory()
     {
-        return $this->belongsTo('App\Models\Sub_Category', 'sub_categories_id');
+        return $this->belongsTo(\App\Models\Sub_Category::class, 'sub_categories_id');
     }
 
     public function getImagePathAttribute()
     {
         if ($this->image == 'default.png') {
-            
-            return asset('uploads/market_images/' . $this->image);
+
+            return asset('uploads/market_images/'.$this->image);
         }
 
-        return asset('storage/' . $this->image);
+        return asset('storage/'.$this->image);
 
     } //end of get image path
 

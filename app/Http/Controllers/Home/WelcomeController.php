@@ -10,7 +10,6 @@ use App\Models\Product;
 use App\Models\Rate;
 use App\Models\Sub_Category;
 use App\Models\WalletDatabase;
-use Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
@@ -19,21 +18,20 @@ use Illuminate\Http\Request;
 ////////////////////////////
 class WelcomeController extends Controller
 {
-
     public function how_useage($sub_category_id)
     {
         // dd($id);
         $parent_categories = Parent_Category::with('sub_category')->get();
-        
+
         // if (session()->get('rate') == null) {
 
-            $how_useage     = HowUse::find($sub_category_id);
+        $how_useage = HowUse::find($sub_category_id);
 
-            $all_how_useage = HowUse::all();
-            // dd($how_useage->description);
-            $how_useage     = HowUse::where('sub_categorys_id', $sub_category_id)->get();
+        $all_how_useage = HowUse::all();
+        // dd($how_useage->description);
+        $how_useage = HowUse::where('sub_categorys_id', $sub_category_id)->get();
 
-            // dd($how_useage);
+        // dd($how_useage);
         // }
 
         return view('home.how_useage', compact('parent_categories', 'how_useage', 'all_how_useage'));
@@ -67,7 +65,7 @@ class WelcomeController extends Controller
 
                 $ses = Cart::content();
 
-                if (!$ses == null) {
+                if (! $ses == null) {
 
                     // dd($ses);
 
@@ -87,13 +85,13 @@ class WelcomeController extends Controller
 
             $cartss = WalletDatabase::where('users_id', '=', \Auth::guard('cliants')->user()->id)->get();
 
-            if (!$cartss == null) {
+            if (! $cartss == null) {
 
                 foreach ($cartss as $cart) {
 
                     $dd = Product::where('id', $cart->cart_id)->first();
 
-                    if (!$dd == null) {
+                    if (! $dd == null) {
 
                         $duplicates = Cart::search(function ($cartItem, $rowId) use ($dd) {
                             return $cartItem->id === $dd->id;
@@ -106,7 +104,7 @@ class WelcomeController extends Controller
                         }
 
                         Cart::add($dd->id, $dd->cart_details->cart_name, 1, $dd->amrecan_price)
-                            ->associate('App\Models\Product');
+                            ->associate(\App\Models\Product::class);
 
                     }
 
@@ -117,7 +115,7 @@ class WelcomeController extends Controller
 
             // dd(Cart::content());
 
-            if (!session()->get('rate') == null) {
+            if (! session()->get('rate') == null) {
 
                 if (session()->get('rate') == 'UST') {
 
@@ -151,13 +149,13 @@ class WelcomeController extends Controller
 
         $sub_categories = Sub_Category::where('id', '=', $category)->get();
 
-        $market_id   = Product::where('sub_category_id', $category)->pluck('market_id');
+        $market_id = Product::where('sub_category_id', $category)->pluck('market_id');
 
-        $carts    = Product::where('sub_category_id', $category)->get();
+        $carts = Product::where('sub_category_id', $category)->get();
 
         $SubImage = Product::where('sub_category_id', $category)->first();
 
-        $markets   = Market::whereIn('id', $market_id)->get();
+        $markets = Market::whereIn('id', $market_id)->get();
 
         return view('home.products', compact('carts', 'sub_categories', 'markets', 'parent_categories', 'SubImage'));
 
@@ -175,10 +173,10 @@ class WelcomeController extends Controller
         $carts = Product::where('sub_category_id', $category)->where('market_id', $market)->get();
 
         $market_id = Product::where('sub_category_id', $category)->pluck('market_id');
-        $markets   = Market::whereIn('id', $market_id)->get();
+        $markets = Market::whereIn('id', $market_id)->get();
         $SubImage = Product::where('sub_category_id', $category)->first();
 
-        if (!session()->get('rate') == null) {
+        if (! session()->get('rate') == null) {
 
             if (session()->get('rate') == 'UST') {
 
@@ -201,7 +199,7 @@ class WelcomeController extends Controller
             }
         }
 
-        return view('home.markets', compact('carts', 'markets', 'sub_categories', 'parent_categories','SubImage'));
+        return view('home.markets', compact('carts', 'markets', 'sub_categories', 'parent_categories', 'SubImage'));
 
     } //end of function
 
@@ -216,7 +214,7 @@ class WelcomeController extends Controller
 
         $carts = Product::find($cart);
 
-        if (!session()->get('rate') == null) {
+        if (! session()->get('rate') == null) {
 
             if (session()->get('rate') == 'UST') {
 
@@ -267,32 +265,32 @@ class WelcomeController extends Controller
                 session()->put('price_icon', 'ر.س');
             }
 
-            if (session()->get('rate') == 'AED' && \Lang::locale() == "ar") {
+            if (session()->get('rate') == 'AED' && \Lang::locale() == 'ar') {
 
                 session()->put('price_icon', 'د.أ');
             }
 
-            if (session()->get('rate') == 'KWD' && \Lang::locale() == "ar") {
+            if (session()->get('rate') == 'KWD' && \Lang::locale() == 'ar') {
 
                 session()->put('price_icon', 'د.ك');
 
-            }if (session()->get('rate') == 'MAD' && \Lang::locale() == "ar") {
+            }if (session()->get('rate') == 'MAD' && \Lang::locale() == 'ar') {
 
                 session()->put('price_icon', 'د.م');
 
             }
-            if (session()->get('rate') == 'TRY' && \Lang::locale() == "ar") {
+            if (session()->get('rate') == 'TRY' && \Lang::locale() == 'ar') {
 
                 session()->put('price_icon', 'ل.ت');
 
             }
 
-            if (session()->get('rate') == 'LYD' && \Lang::locale() == "ar") {
+            if (session()->get('rate') == 'LYD' && \Lang::locale() == 'ar') {
 
                 session()->put('price_icon', 'ل.ل');
 
             }
-            if (session()->get('rate') == 'NIS' && \Lang::locale() == "ar") {
+            if (session()->get('rate') == 'NIS' && \Lang::locale() == 'ar') {
 
                 session()->put('price_icon', 'ش.ف');
 
@@ -336,5 +334,4 @@ class WelcomeController extends Controller
         return back();
 
     }
-
 } //end of controller gome

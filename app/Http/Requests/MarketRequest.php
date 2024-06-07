@@ -24,8 +24,8 @@ class MarketRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name'      => 'required',
-            'name_en'   => 'required',
+            'name' => 'required',
+            'name_en' => 'required',
         ];
 
         if (request()->getMethod() == 'POST') {
@@ -38,9 +38,9 @@ class MarketRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required'                 => trans('validation.required'),
-            'sub_categories_id.required'    => trans('validation.required'),
-            'name_en.required'              => trans('validation.required'),
+            'name.required' => trans('validation.required'),
+            'sub_categories_id.required' => trans('validation.required'),
+            'name_en.required' => trans('validation.required'),
         ];
     }
 }

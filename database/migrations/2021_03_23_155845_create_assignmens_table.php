@@ -15,7 +15,7 @@ class CreateAssignmensTable extends Migration
     {
         Schema::create('assignmens', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger( 'claint_id' );
+            $table->bigInteger('claint_id');
             $table->string('total_balance')->nullable();
             $table->string('exist_balance')->nullable();
             $table->string('number_of_invited')->nullable();

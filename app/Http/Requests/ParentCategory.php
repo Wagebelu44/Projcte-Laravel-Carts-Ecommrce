@@ -24,18 +24,18 @@ class ParentCategory extends FormRequest
     public function rules()
     {
         return [
-            'name'    => 'required',
+            'name' => 'required',
             'name_en' => 'required',
-            'image'   => 'image',
+            'image' => 'image',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required'    => trans('validation.required'),
+            'name.required' => trans('validation.required'),
             'name_en.required' => trans('validation.required'),
-            'image.required'   => trans('validation.required'),
+            'image.required' => trans('validation.required'),
         ];
     }
 }

@@ -17,20 +17,19 @@ class CartDetail extends Model
 
     public function getImagePathAttribute()
     {
-        return asset('storage/' . $this->image);
+        return asset('storage/'.$this->image);
 
     } //end of get image path
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'users_id');
+        return $this->belongsTo(\App\Models\User::class, 'users_id');
     }
 
     public function sub_category()
     {
 
-        return $this->belongsTo('App\Models\Sub_Category', 'sub_category_id');
+        return $this->belongsTo(\App\Models\Sub_Category::class, 'sub_category_id');
 
     }
-
 } //end of models
