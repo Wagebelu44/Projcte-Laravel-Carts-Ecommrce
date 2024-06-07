@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use App\Exports\GenerateCartExports;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GenerateCartRequest;
@@ -11,7 +9,9 @@ use App\Models\GenerateCart;
 use App\Models\Market;
 use App\Models\Sub_Category;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GenerateCartController extends Controller

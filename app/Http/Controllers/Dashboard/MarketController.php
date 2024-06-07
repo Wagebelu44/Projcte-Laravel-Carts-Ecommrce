@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MarketRequest;
 use App\Models\Market;
 use App\Models\Sub_Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class MarketController extends Controller
 {

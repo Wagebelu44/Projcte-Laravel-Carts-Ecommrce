@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\Http\Response;
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\AbouUs;
 use App\Models\CommonQuestions;
@@ -14,6 +12,8 @@ use App\Models\Product;
 use App\Models\ReturnPolicy;
 use App\Models\Usage_Policy;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class FooterController extends Controller
 {

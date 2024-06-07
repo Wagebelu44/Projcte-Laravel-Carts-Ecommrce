@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Jobs\UpdateCoupon;
 use App\Models\Cupon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CouponsController extends Controller

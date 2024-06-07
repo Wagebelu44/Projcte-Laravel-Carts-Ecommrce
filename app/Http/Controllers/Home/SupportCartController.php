@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Mail\Ticit;
 use App\Models\Parent_Category;
 use App\Models\SupportCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
 class SupportCartController extends Controller
 {

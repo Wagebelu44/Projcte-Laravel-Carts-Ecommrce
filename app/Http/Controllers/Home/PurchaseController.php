@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\View\View;
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Market;
 use App\Models\Parent_Category;
@@ -12,8 +10,10 @@ use App\Models\Sub_Category;
 use App\Models\WalletDatabase;
 use App\Purchase;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class PurchaseController extends Controller
 {

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\HowUse;
 use App\Models\Market;
@@ -13,6 +12,7 @@ use App\Models\Sub_Category;
 use App\Models\WalletDatabase;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 // req  1usd = ['SQIRK] AMOUT * EX
 

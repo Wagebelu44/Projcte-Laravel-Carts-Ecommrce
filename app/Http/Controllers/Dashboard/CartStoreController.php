@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CartStoreRequests;
 use App\Jobs\NotifyJob;
@@ -12,7 +10,9 @@ use App\Models\Cliant;
 use App\Models\Notify;
 use App\Models\Product;
 use App\Models\Sub_Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CartStoreController extends Controller
 {

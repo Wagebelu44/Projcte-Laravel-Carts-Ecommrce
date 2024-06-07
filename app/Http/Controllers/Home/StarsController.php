@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\View\View;
-use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Mail\StarsOrder;
 use App\Models\CartStore;
@@ -14,7 +12,9 @@ use App\Models\Product;
 use App\Models\Purchase;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
 class StarsController extends Controller
 {

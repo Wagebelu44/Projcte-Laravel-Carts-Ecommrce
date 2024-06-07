@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CuponRequest;
 use App\Models\Cupon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CuponController extends Controller
 {

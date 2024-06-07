@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\AbouUs;
 use App\Models\CartStore;
@@ -14,8 +13,8 @@ use App\Models\GenerateCart;
 use App\Models\HolidayMessage;
 use App\Models\HowUse;
 use App\Models\Market;
-// use App\Models\Purchase;
 use App\Models\MonthlyMessage;
+// use App\Models\Purchase;
 use App\Models\Parent_Category;
 use App\Models\PrivacyPolicy;
 use App\Models\Product;
@@ -25,6 +24,7 @@ use App\Models\Sub_Category;
 use App\Models\SupportCart;
 use App\Models\Usage_Policy;
 use App\Models\User;
+use Illuminate\View\View;
 
 class WelcomeController extends Controller
 {

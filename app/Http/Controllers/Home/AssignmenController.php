@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\Cliant;
 use App\Models\Parent_Category;
 use App\Models\Product;
+use Illuminate\View\View;
 
 class AssignmenController extends Controller
 {

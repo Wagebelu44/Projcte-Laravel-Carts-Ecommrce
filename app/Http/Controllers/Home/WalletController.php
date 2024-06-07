@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\View\View;
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Parent_Category;
 use App\Models\Product;
 use App\Models\WalletDatabase;
 use Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class WalletController extends Controller
 {

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 use Intervention\Image\Facades\Image;
 
 class UserController extends Controller

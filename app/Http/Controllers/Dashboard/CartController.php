@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CartRequest;
 use App\Models\CartDetail;
 use App\Models\Market;
 use App\Models\Product;
 use App\Models\Sub_Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CartController extends Controller
 {

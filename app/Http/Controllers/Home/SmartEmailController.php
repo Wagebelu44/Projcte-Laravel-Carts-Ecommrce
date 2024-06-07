@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Jobs\SmartEmailJob;
 use App\Models\SmartEmail;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SmartEmailController extends Controller
 {

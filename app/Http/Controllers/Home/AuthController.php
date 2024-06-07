@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Home;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Mail\EmailVerify;
 use App\Models\Cliant;
 use App\Models\WalletDatabase;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 use Socialite;
 
 class AuthController extends Controller
