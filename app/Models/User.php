@@ -20,11 +20,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
     protected $appends = ['image_path'];
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+        ];
+    }
 
     public function getImagePathAttribute()
     {
