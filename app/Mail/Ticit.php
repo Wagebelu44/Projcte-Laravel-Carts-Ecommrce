@@ -2,19 +2,17 @@
 
 namespace App\Mail;
 
+use App\Models\SupportCart;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\SupportCart;
-
-
 
 class Ticit extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $ticit;
+
     /**
      * Create a new message instance.
      *
@@ -22,7 +20,7 @@ class Ticit extends Mailable
      */
     public function __construct(SupportCart $ticit)
     {
-        
+
         $this->ticit = $ticit;
     }
 
@@ -35,8 +33,8 @@ class Ticit extends Mailable
     {
         // dd($this->ticit->email);
         return $this->to($this->ticit->cliant_email)
-                    ->bcc('another@another.com')
-                    ->subject('majal store')
-                    ->markdown('emails.ticit');
+            ->bcc('another@another.com')
+            ->subject('majal store')
+            ->markdown('emails.ticit');
     }
 }

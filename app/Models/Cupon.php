@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class cupon extends Model
 {
-  
     protected $guarded = [];
 
     public function user()
@@ -16,9 +15,8 @@ class cupon extends Model
 
     public function discount($total)
     {
-        
-            return $this->value;
-     
+
+        return $this->value;
+
     }
- 
 }//end of model

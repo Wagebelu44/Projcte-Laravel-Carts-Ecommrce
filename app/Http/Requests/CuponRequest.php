@@ -24,16 +24,16 @@ class CuponRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'    => 'required',
-            'value'   => 'required',
+            'name' => 'required',
+            'value' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required'    => trans('validation.required'),
-            'value.required'   => trans('validation.required'),
+            'name.required' => trans('validation.required'),
+            'value.required' => trans('validation.required'),
         ];
     }
 }

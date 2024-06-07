@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 
 class WalletController extends Controller
 {
-
     public function index()
     {
 
@@ -26,21 +25,21 @@ class WalletController extends Controller
         // $mightAlsoLike = Product::mightAlsoLike()->get();
         $parent_categories = Parent_Category::with('sub_category')->get();
 
-        $discount        = session()->get('coupon')['discount'] ?? 0;
-        $code            = session()->get('coupon')['name'] ?? null;
-        $tax             = config('cart.tax') / 100;
-        $number          = Cart::subtotal();
-        $convertNum      = preg_replace('/,/', '', $number);
-        $newSubtotal     = ($convertNum - $discount);
-        $newTotal        = $newSubtotal;
-        $newTax          = $newSubtotal * $tax;
+        $discount = session()->get('coupon')['discount'] ?? 0;
+        $code = session()->get('coupon')['name'] ?? null;
+        $tax = config('cart.tax') / 100;
+        $number = Cart::subtotal();
+        $convertNum = preg_replace('/,/', '', $number);
+        $newSubtotal = ($convertNum - $discount);
+        $newTotal = $newSubtotal;
+        $newTax = $newSubtotal * $tax;
         $newTotalwithTax = $newTotal * (1 + $tax);
         // dd($newTotalwithTax);
 
         return view('home.wallet', compact('parent_categories'))->with([
-            'discount'    => $discount,
+            'discount' => $discount,
             'newSubtotal' => $newSubtotal,
-            'newTotal'    => $newTotal,
+            'newTotal' => $newTotal,
         ]);
     }
 
@@ -59,15 +58,15 @@ class WalletController extends Controller
 
             $walletdb = new WalletDatabase();
 
-            $walletdb->cart_id         = $carts->id;
-            $walletdb->cart_name       = $carts->cart_details->cart_name;
-            $walletdb->short_descript  = $carts->cart_details->short_descript;
-            $walletdb->cart_text       = $carts->cart_details->cart_text;
-            $walletdb->users_id        = Auth::guard('cliants')->user()->id;
-            $walletdb->market_id       = $carts->market_id;
-            $walletdb->image           = $carts->cart_details->image_path;
+            $walletdb->cart_id = $carts->id;
+            $walletdb->cart_name = $carts->cart_details->cart_name;
+            $walletdb->short_descript = $carts->cart_details->short_descript;
+            $walletdb->cart_text = $carts->cart_details->cart_text;
+            $walletdb->users_id = Auth::guard('cliants')->user()->id;
+            $walletdb->market_id = $carts->market_id;
+            $walletdb->image = $carts->cart_details->image_path;
             $walletdb->sub_category_id = $carts->sub_category_id;
-            $walletdb->amrecan_price   = $carts->amrecan_price;
+            $walletdb->amrecan_price = $carts->amrecan_price;
 
             // dd($walletdb);
 
@@ -96,15 +95,15 @@ class WalletController extends Controller
 
             $walletdb = new WalletDatabase();
 
-            $walletdb->cart_id         = $carts->id;
-            $walletdb->cart_name       = $carts->cart_name;
-            $walletdb->short_descript  = $carts->short_descript;
-            $walletdb->cart_text       = $carts->cart_text;
-            $walletdb->users_id        = Auth::guard('cliants')->user()->id;
-            $walletdb->market_id       = $carts->market_id;
-            $walletdb->image           = $carts->image;
+            $walletdb->cart_id = $carts->id;
+            $walletdb->cart_name = $carts->cart_name;
+            $walletdb->short_descript = $carts->short_descript;
+            $walletdb->cart_text = $carts->cart_text;
+            $walletdb->users_id = Auth::guard('cliants')->user()->id;
+            $walletdb->market_id = $carts->market_id;
+            $walletdb->image = $carts->image;
             $walletdb->sub_category_id = $carts->sub_category_id;
-            $walletdb->amrecan_price   = $carts->amrecan_price;
+            $walletdb->amrecan_price = $carts->amrecan_price;
 
             // dd($walletdb);
 
@@ -137,6 +136,7 @@ class WalletController extends Controller
 
         Cart::update($id, $request->quantity);
         session()->flash('success_message', 'Quantity was updated successfully!');
+
         return response()->json(['success' => true]);
     }
 
@@ -149,7 +149,7 @@ class WalletController extends Controller
 
             $WalletDatabase = WalletDatabase::where('cart_id', $cart->id)->where('users_id', \Auth::guard('cliants')->user()->id)->first();
 
-            if (!$WalletDatabase == null) {
+            if (! $WalletDatabase == null) {
                 $WalletDatabase->delete();
 
             }

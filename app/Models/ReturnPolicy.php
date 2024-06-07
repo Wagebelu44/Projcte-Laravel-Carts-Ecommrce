@@ -12,5 +12,4 @@ class ReturnPolicy extends Model
     protected $guarded = [];
 
     public $translatable = ['text'];
-
 }//end ofmodel

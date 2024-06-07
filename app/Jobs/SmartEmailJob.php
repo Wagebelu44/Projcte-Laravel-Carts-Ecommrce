@@ -2,14 +2,14 @@
 
 namespace App\Jobs;
 
+use App\Mail\SmartEmailMail;
+use App\Models\Cliant;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Cliant;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SmartEmailMail;
 
 class SmartEmailJob implements ShouldQueue
 {
@@ -22,13 +22,11 @@ class SmartEmailJob implements ShouldQueue
      */
     public $email;
 
-    
     public function __construct($email)
     {
-       
 
         $this->email = $email;
-      
+
     }
 
     /**
@@ -39,19 +37,18 @@ class SmartEmailJob implements ShouldQueue
     public function handle()
     {
 
-        
-       $email = $this->email;
-        $cliants = Cliant::where('smart_email',1)->get();
+        $email = $this->email;
+        $cliants = Cliant::where('smart_email', 1)->get();
 
-        if(!$cliants == null){
+        if (! $cliants == null) {
 
-            foreach($cliants as $cliant){
-            $cliant->message = $email;
+            foreach ($cliants as $cliant) {
+                $cliant->message = $email;
 
-            $mail =  Mail::send(new SmartEmailMail($cliant));
-           
+                $mail = Mail::send(new SmartEmailMail($cliant));
+
             }
-           
+
         }
     }
 }

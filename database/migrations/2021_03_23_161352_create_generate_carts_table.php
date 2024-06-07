@@ -26,9 +26,9 @@ class CreateGenerateCartsTable extends Migration
             $table->string('market_id')->nullable();
             $table->string('ended_cart_time')->nullable();
             $table->bigInteger('sub_category_id')->unsigned();
-            
+
             $table->double('count_of_buy')->nullable();
-    
+
             $table->double('amrecan_price');
 
             $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');

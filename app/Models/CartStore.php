@@ -7,8 +7,8 @@ use Spatie\Translatable\HasTranslations;
 
 class CartStore extends Model
 {
-	use HasTranslations;
-	
+    use HasTranslations;
+
     protected $guarded = [];
 
     protected $table = 'cart_stores';
@@ -17,18 +17,18 @@ class CartStore extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User','users_id');
+        return $this->belongsTo('App\Models\User', 'users_id');
     }
 
-    public function sub_category() {
+    public function sub_category()
+    {
 
-	    return $this->belongsTo('App\Models\Sub_Category','sub_category_id');
+        return $this->belongsTo('App\Models\Sub_Category', 'sub_category_id');
 
-   	}
+    }
 
     public function cart()
     {
-        return $this->belongsTo('App\Models\Product','products_id');
+        return $this->belongsTo('App\Models\Product', 'products_id');
     }
-    
 }//end of models

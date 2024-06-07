@@ -60,7 +60,7 @@ return [
             'root' => public_path('uploads/market'),
         ],
 
-       'public_uploads' => [
+        'public_uploads' => [
             'driver' => 'local',
             'root' => public_path('uploads/user_images'),
         ],
@@ -69,8 +69,6 @@ return [
             'driver' => 'local',
             'root' => public_path('uploads/categories'),
         ],
-
-       
 
         's3' => [
             'driver' => 's3',

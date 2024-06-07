@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class AboutUsController extends Controller
 {
-
     public function __construct()
     {
         //create read update delete
@@ -24,8 +23,8 @@ class AboutUsController extends Controller
         $about_uss = AbouUs::when($request->search, function ($q) use ($request) {
 
             // return $q->HasTranslations('name', '%' . $request->search . '%');
-            return $q->where('text->en', 'like', '%' . $request->search . '%')
-            ->orWhere('text->en', 'like', '%' . $request->search . '%');
+            return $q->where('text->en', 'like', '%'.$request->search.'%')
+                ->orWhere('text->en', 'like', '%'.$request->search.'%');
 
         })->latest()->paginate(15);
 
@@ -33,68 +32,66 @@ class AboutUsController extends Controller
         return view('dashboard.settings.about_us.index', compact('about_uss'));
     }//end of index
 
-
     public function create()
     {
         return view('dashboard.settings.about_us.create');
     }//end of create
 
-
     public function store(Request $request)
     {
-         // dd($request->all());
+        // dd($request->all());
         try {
 
             $request_all = $request->all();
 
             $about_uss = new AbouUs();
-            $about_uss->text      = ['ar' => $request_all['text'], 'en' => $request_all['text_en']];
+            $about_uss->text = ['ar' => $request_all['text'], 'en' => $request_all['text_en']];
             $about_uss->save();
 
             notify()->success(__('home.added_successfully'));
+
             return redirect()->route('dashboard.about_us.index');
 
-         } catch (\Exception $e) {
+        } catch (\Exception $e) {
 
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
 
         }//end try
     }//end of store
 
-
-
-    public function edit(AbouUs $abouUs,$id)
+    public function edit(AbouUs $abouUs, $id)
     {
         $abouUs = AbouUs::find($id);
-        return view('dashboard.settings.about_us.edit',compact('abouUs'));
+
+        return view('dashboard.settings.about_us.edit', compact('abouUs'));
     }//end of edit
 
-
-    public function update(Request $request, AbouUs $abouUs,$id)
+    public function update(Request $request, AbouUs $abouUs, $id)
     {
         $abouUs = AbouUs::find($id);
         try {
 
             $abouUs->update([
-                'text'     => ['ar'=> $request['text'],'en' => $request['text_en']],
-            ]);            
+                'text' => ['ar' => $request['text'], 'en' => $request['text_en']],
+            ]);
 
             notify()->success(__('home.added_successfully'));
+
             return redirect()->route('dashboard.about_us.index');
 
-         } catch (\Exception $e) {
+        } catch (\Exception $e) {
 
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
 
         }//end try
     }//end of update
 
-
-    public function destroy(AbouUs $abouUs,$id)
+    public function destroy(AbouUs $abouUs, $id)
     {
         $abouUs = AbouUs::find($id);
         $abouUs->delete();
         notify()->success(__('home.deleted_successfully'));
+
         return redirect()->route('dashboard.about_us.index');
     }//end of destroy
 

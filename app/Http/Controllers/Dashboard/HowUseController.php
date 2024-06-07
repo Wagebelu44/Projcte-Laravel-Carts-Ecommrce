@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\HowUse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\HowUse;
 use App\Models\Sub_Category;
-use App\Models\Product;
-
+use Illuminate\Http\Request;
 
 class HowUseController extends Controller
 {
-
     public function index()
     {
         $uses = HowUse::all();
@@ -20,16 +17,13 @@ class HowUseController extends Controller
 
     }//end of index
 
-
     public function create()
     {
-        $sub_categorys = Sub_Category::all(); 
+        $sub_categorys = Sub_Category::all();
 
-        return view('dashboard.how_to_use.create'  ,compact('sub_categorys') );
+        return view('dashboard.how_to_use.create', compact('sub_categorys'));
 
     }//end of create
-    
-
 
     public function store(Request $request)
     {
@@ -40,8 +34,8 @@ class HowUseController extends Controller
 
             $how_to_use = new HowUse();
 
-            $how_to_use->description        = ['ar' => $request_all['description'], 'en' => $request_all['description_en']];
-            $how_to_use->sub_categorys_id   = $request->sub_categorys_id;
+            $how_to_use->description = ['ar' => $request_all['description'], 'en' => $request_all['description_en']];
+            $how_to_use->sub_categorys_id = $request->sub_categorys_id;
 
             $how_to_use->save();
             // dd($how_to_use);
@@ -55,9 +49,8 @@ class HowUseController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
 
         }//end try
-        
-    }//end of store
 
+    }//end of store
 
     public function edit($id)
     {
@@ -65,25 +58,22 @@ class HowUseController extends Controller
         $HowUses = HowUse::find($id);
         $sub_categorys = Sub_Category::all();
 
-        return view('dashboard.how_to_use.edit'  ,compact('HowUses','sub_categorys'));
+        return view('dashboard.how_to_use.edit', compact('HowUses', 'sub_categorys'));
     }//end of edit
 
-
-
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         try {
 
-        
             $howUse = HowUse::find($id);
 
             $howUse->update([
-                'description'       => ['ar'=> $request['description'],'en' => $request['description_en']],
-                'sub_categorys_id'  => $request->sub_categorys_id,
-            ]);            
-
+                'description' => ['ar' => $request['description'], 'en' => $request['description_en']],
+                'sub_categorys_id' => $request->sub_categorys_id,
+            ]);
 
             notify()->success(__('home.updated_successfully'));
+
             return redirect()->route('dashboard.how_to_use.index');
 
         } catch (\Exception $e) {
@@ -94,13 +84,12 @@ class HowUseController extends Controller
 
     }//end of updaet
 
-   
-
-    public function destroy(HowUse $howUse , $id)
+    public function destroy(HowUse $howUse, $id)
     {
         $howUse = HowUse::find($id);
         $howUse->delete();
         notify()->success(__('home.deleted_successfully'));
+
         return redirect()->route('dashboard.how_to_use.index');
     }//end of destroy
 

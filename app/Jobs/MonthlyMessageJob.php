@@ -2,16 +2,14 @@
 
 namespace App\Jobs;
 
+use App\Mail\MonthlyMessageMail;
+use App\Models\Cliant;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Cliant;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\MonthlyMessageMail;
-
-
 
 class MonthlyMessageJob implements ShouldQueue
 {
@@ -22,16 +20,13 @@ class MonthlyMessageJob implements ShouldQueue
      *
      * @return void
      */
-
     public $email;
 
-    
     public function __construct($email)
     {
-       
 
         $this->email = $email;
-      
+
     }
 
     /**
@@ -42,19 +37,18 @@ class MonthlyMessageJob implements ShouldQueue
     public function handle()
     {
 
-        
-       $email = $this->email;
-        $cliants = Cliant::where('monthly_message',1)->get();
+        $email = $this->email;
+        $cliants = Cliant::where('monthly_message', 1)->get();
 
-        if(!$cliants == null){
+        if (! $cliants == null) {
 
-            foreach($cliants as $cliant){
-            $cliant->message = $email;
+            foreach ($cliants as $cliant) {
+                $cliant->message = $email;
 
-            $mail =  Mail::send(new MonthlyMessageMail($cliant));
-           
+                $mail = Mail::send(new MonthlyMessageMail($cliant));
+
             }
-           
+
         }
     }
 }

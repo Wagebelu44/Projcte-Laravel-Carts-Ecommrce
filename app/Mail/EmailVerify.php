@@ -2,20 +2,16 @@
 
 namespace App\Mail;
 
+use App\Models\Cliant;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Cliant;
-
 
 class EmailVerify extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $cliant;
-
-   
 
     /**
      * Create a new message instance.
@@ -25,7 +21,7 @@ class EmailVerify extends Mailable
     public function __construct(Cliant $cliant)
     {
         $this->cliant = $cliant;
-       
+
     }
 
     /**
@@ -37,10 +33,10 @@ class EmailVerify extends Mailable
     {
 
         // dd($this->cliant);
-       
+
         return $this->to($this->cliant->email, $this->cliant->id)
-                    ->subject('majal store')
-                    ->markdown('emails.verifyemail');
-    
+            ->subject('majal store')
+            ->markdown('emails.verifyemail');
+
     }
 }

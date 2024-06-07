@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class ReturnPolicyController extends Controller
 {
-
     public function __construct()
     {
         //create read update delete
@@ -24,7 +23,7 @@ class ReturnPolicyController extends Controller
         $return_policys = ReturnPolicy::when($request->search, function ($q) use ($request) {
 
             // return $q->HasTranslations('name', '%' . $request->search . '%');
-            return $q->where('text', 'like', '%' . $request->search . '%');
+            return $q->where('text', 'like', '%'.$request->search.'%');
 
         })->latest()->paginate(15);
 
@@ -32,12 +31,10 @@ class ReturnPolicyController extends Controller
         return view('dashboard.settings.return_policy.index', compact('return_policys'));
     }//end of index
 
-
     public function create()
     {
         return view('dashboard.settings.return_policy.create');
     }//end of create
-
 
     public function store(Request $request)
     {
@@ -47,13 +44,14 @@ class ReturnPolicyController extends Controller
             $request_all = $request->all();
 
             $return_policy = new ReturnPolicy();
-            $return_policy->text      = ['ar' => $request_all['text'], 'en' => $request_all['text_en']];
+            $return_policy->text = ['ar' => $request_all['text'], 'en' => $request_all['text_en']];
             $return_policy->save();
 
             notify()->success(__('home.added_successfully'));
+
             return redirect()->route('dashboard.return_policy.index');
 
-         } catch (\Exception $e) {
+        } catch (\Exception $e) {
 
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
 
@@ -61,12 +59,10 @@ class ReturnPolicyController extends Controller
 
     }//end of store
 
-
     public function edit(ReturnPolicy $returnPolicy)
     {
-        return view('dashboard.settings.return_policy.edit',compact('returnPolicy'));
+        return view('dashboard.settings.return_policy.edit', compact('returnPolicy'));
     }//end of edit
-
 
     public function update(Request $request, ReturnPolicy $returnPolicy)
     {
@@ -74,25 +70,26 @@ class ReturnPolicyController extends Controller
         try {
 
             $returnPolicy->update([
-                'text'     => ['ar'=> $request['text'],'en' => $request['text_en']],
-            ]);            
+                'text' => ['ar' => $request['text'], 'en' => $request['text_en']],
+            ]);
 
             notify()->success(__('home.added_successfully'));
+
             return redirect()->route('dashboard.return_policy.index');
 
-         } catch (\Exception $e) {
+        } catch (\Exception $e) {
 
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
 
         }//end try
     }//end of update
 
-
     public function destroy(ReturnPolicy $returnPolicy)
     {
         // $returnPolicy = ReturnPolicy::find($id);
         $returnPolicy->delete();
         notify()->success(__('home.deleted_successfully'));
+
         return redirect()->route('dashboard.return_policy.index');
     }//end of destroy
 

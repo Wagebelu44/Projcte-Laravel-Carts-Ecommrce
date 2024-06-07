@@ -14,31 +14,31 @@ return [
     'roles_structure' => [
 
         'super_admin' => [
-            'dashboard'        => 'r',
-            'users'            => 'c,r,u,d',
-            'cupons'           => 'c,r,u,d',
-            'pay_currencie'    => 'c,r,u,d',
+            'dashboard' => 'r',
+            'users' => 'c,r,u,d',
+            'cupons' => 'c,r,u,d',
+            'pay_currencie' => 'c,r,u,d',
             'parent_categorys' => 'c,r,u,d',
-            'sub_categories'   => 'c,r,u,d',
-            'markets'          => 'c,r,u,d',
-            'carts'            => 'c,r,u,d',
-            'carts_store'      => 'c,r,u,d',
-            'generate_carts'   => 'c,r,u,d',
-            'how_to_use'       => 'c,r,u,d',
-            'settings'         => 'c,r,u,d',
+            'sub_categories' => 'c,r,u,d',
+            'markets' => 'c,r,u,d',
+            'carts' => 'c,r,u,d',
+            'carts_store' => 'c,r,u,d',
+            'generate_carts' => 'c,r,u,d',
+            'how_to_use' => 'c,r,u,d',
+            'settings' => 'c,r,u,d',
 
         ],
 
         'admin' => [
             'dashboard' => 'r',
         ],
-        
+
     ],
 
     'permissions_map' => [
         'c' => 'create',
         'r' => 'read',
         'u' => 'update',
-        'd' => 'delete'
-    ]
+        'd' => 'delete',
+    ],
 ];

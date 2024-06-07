@@ -24,23 +24,22 @@ class ConnectRequests extends FormRequest
     public function rules()
     {
         return [
-            'name'       => 'required|min:2|max:150',
-            'email'      => 'required',
-            'subject'    => 'required',
-            'message'    => 'required',
-            
+            'name' => 'required|min:2|max:150',
+            'email' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+
         ];
     }
 
-     public function messages()
+    public function messages()
     {
         return [
-            'name.required'     => trans('validation.required'),
-            'email.required'    => trans('validation.required'),
-            'subject.required'  => trans('validation.required'),
-            'message.required'  => trans('validation.required'),
-         
+            'name.required' => trans('validation.required'),
+            'email.required' => trans('validation.required'),
+            'subject.required' => trans('validation.required'),
+            'message.required' => trans('validation.required'),
+
         ];
     }
-
 }

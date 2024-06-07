@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Mail;
 
 class SupportCartController extends Controller
 {
-
     public function test(Request $request)
     {
         // return 'ddddddddddd';
         dd($request->all());
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,6 +34,7 @@ class SupportCartController extends Controller
         $parent_categories = Parent_Category::with('sub_category')->get();
 
         $ticits = SupportCart::where('claint_id', \Auth::guard('cliants')->user()->id)->get();
+
         return view('home.ticit-list-supports', compact('parent_categories', 'ticits'));
     }
 
@@ -42,12 +43,12 @@ class SupportCartController extends Controller
 
         $ticits = SupportCart::latest()->when($request->search, function ($q) use ($request) {
 
-            return $q->where('cliant_email', 'like', '%' . $request->search . '%')
-                ->orWhere('ticit_answer', 'like', '%' . $request->search . '%')
-                ->orWhere('ticit_reply', 'like', '%' . $request->search . '%')
-                ->orWhere('ticit_address', 'like', '%' . $request->search . '%')
-                ->orWhere('number_ticit', 'like', '%' . $request->search . '%')
-                ->orWhere('details_ticit', 'like', '%' . $request->search . '%');
+            return $q->where('cliant_email', 'like', '%'.$request->search.'%')
+                ->orWhere('ticit_answer', 'like', '%'.$request->search.'%')
+                ->orWhere('ticit_reply', 'like', '%'.$request->search.'%')
+                ->orWhere('ticit_address', 'like', '%'.$request->search.'%')
+                ->orWhere('number_ticit', 'like', '%'.$request->search.'%')
+                ->orWhere('details_ticit', 'like', '%'.$request->search.'%');
             // ->orWhere('address', 'like', '%' . $request->search . '%');
 
         })->latest()->paginate(15);
@@ -58,19 +59,18 @@ class SupportCartController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         dd($request->all());
-                // return "gggggggggg";
+        // return "gggggggggg";
 
         $request->validate([
             'ticit_address' => 'required',
-            'ticit_type'    => 'required',
+            'ticit_type' => 'required',
             'details_ticit' => 'required',
-            'images'        => 'required',
+            'images' => 'required',
         ]);
 
         dd($request->all());
@@ -79,9 +79,9 @@ class SupportCartController extends Controller
         if ($request->has('images')) {
             foreach ($request['images'] as $file) {
 
-                $logo = time() + rand(0, 99) . '.' . $file->extension();
-                $file->move(('images') . '/' . date('d-m-Y'), $logo);
-                array_push($array, '/images/' . date('d-m-Y') . '/' . $logo);
+                $logo = time() + rand(0, 99).'.'.$file->extension();
+                $file->move(('images').'/'.date('d-m-Y'), $logo);
+                array_push($array, '/images/'.date('d-m-Y').'/'.$logo);
                 // $request['image'] = ;
             }
 
@@ -91,20 +91,20 @@ class SupportCartController extends Controller
 
         $store = json_encode($array);
         // dd($request->all());
-        $recover           = json_decode($store, true);
+        $recover = json_decode($store, true);
         $request['images'] = $store;
 
         $ticits = new SupportCart();
 
-        $ticits->claint_id     = \Auth::guard('cliants')->user()->id;
-        $ticits->cliant_email  = \Auth::guard('cliants')->user()->email;
+        $ticits->claint_id = \Auth::guard('cliants')->user()->id;
+        $ticits->cliant_email = \Auth::guard('cliants')->user()->email;
         $ticits->ticit_address = $request->ticit_address;
-        $ticits->ticit_type    = $request->ticit_type;
-        $ticits->ticit_answer  = "ggggg";
-        $ticits->ticit_reply   = "ggggg";
-        $ticits->number_ticit  = bin2hex(openssl_random_pseudo_bytes(4));
+        $ticits->ticit_type = $request->ticit_type;
+        $ticits->ticit_answer = 'ggggg';
+        $ticits->ticit_reply = 'ggggg';
+        $ticits->number_ticit = bin2hex(openssl_random_pseudo_bytes(4));
         $ticits->details_ticit = $request->details_ticit;
-        $ticits->images        = $request['images'] = $store;
+        $ticits->images = $request['images'] = $store;
         $ticits->save();
 
         return response(['success' => true]);
@@ -118,7 +118,6 @@ class SupportCartController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SupportCart  $supportCart
      * @return \Illuminate\Http\Response
      */
     public function show(SupportCart $supportCart)
@@ -144,7 +143,6 @@ class SupportCartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\SupportCart  $supportCart
      * @return \Illuminate\Http\Response
      */
@@ -174,6 +172,7 @@ class SupportCartController extends Controller
             ]);
 
             notify()->success('Laravel Notify is awesome!');
+
             return back();
 
         } catch (\Exception $e) {
@@ -185,7 +184,6 @@ class SupportCartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SupportCart  $supportCart
      * @return \Illuminate\Http\Response
      */
     public function destroy(SupportCart $supportCart)

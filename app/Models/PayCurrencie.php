@@ -12,7 +12,7 @@ class PayCurrencie extends Model
 
     public function getImagePathAttribute()
     {
-        return asset('uploads/PayCurrencie_images/' . $this->image);
+        return asset('uploads/PayCurrencie_images/'.$this->image);
 
     }//end of get image path
 

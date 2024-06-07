@@ -12,7 +12,7 @@ class Market extends Model
     protected $guarded = [];
 
     public $translatable = ['name'];
-    
+
     protected $appends = ['image_path'];
 
     public function user()
@@ -37,11 +37,11 @@ class Market extends Model
     public function getImagePathAttribute()
     {
         if ($this->image == 'default.png') {
-            
-            return asset('uploads/market_images/' . $this->image);
+
+            return asset('uploads/market_images/'.$this->image);
         }
 
-        return asset('storage/' . $this->image);
+        return asset('storage/'.$this->image);
 
     } //end of get image path
 

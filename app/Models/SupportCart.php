@@ -7,12 +7,11 @@ use Spatie\Translatable\HasTranslations;
 
 class SupportCart extends Model
 {
-   
     use HasTranslations;
 
     protected $guarded = [];
 
-    public $translatable = ['cart_type','name_cart','details_cart'];
+    public $translatable = ['cart_type', 'name_cart', 'details_cart'];
 
     public function cliant()
     {
@@ -21,7 +20,7 @@ class SupportCart extends Model
 
     public function getImagePathAttribute()
     {
-        return asset('uploads/user_images/' . $this->image);
+        return asset('uploads/user_images/'.$this->image);
 
     }//end of get image path
 

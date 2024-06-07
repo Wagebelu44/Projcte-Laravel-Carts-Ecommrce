@@ -9,13 +9,12 @@ use App\Models\Product;
 use App\Models\Sub_Category;
 use App\Models\WalletDatabase;
 use App\Purchase;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Gloudemans\Shoppingcart\Facades\Cart;
 
 class PurchaseController extends Controller
 {
-
     public function index()
     {
 
@@ -25,11 +24,11 @@ class PurchaseController extends Controller
             session()->put('rate', 'UST');
 
         }
-        
+
         $parent_categories = Parent_Category::with('sub_category')->get();
-        $sub_categorys     = sub_category::all();
-        $markets           = Market::all();
-        $products          = Product::all();
+        $sub_categorys = sub_category::all();
+        $markets = Market::all();
+        $products = Product::all();
 
         return view('home.purchase', compact('parent_categories', 'sub_categorys', 'markets', 'products'));
     } //end of index
@@ -37,13 +36,14 @@ class PurchaseController extends Controller
     public function parent_category($id)
     {
         // return "gooooooood";
-        $sub_category = sub_category::where("parent_category_id", $id)->get();
+        $sub_category = sub_category::where('parent_category_id', $id)->get();
+
         return response()->json($sub_category);
     } //end of create
 
     public function sub_categoryed($id)
     {
-        $marketd = Market::where("id", $id)->get();
+        $marketd = Market::where('id', $id)->get();
 
         return response()->json($marketd);
     } //end of create
@@ -51,7 +51,8 @@ class PurchaseController extends Controller
     public function makted($id)
     {
         // return "ggggggggggggg";
-        $product = Product::where("id", $id)->with('cart_details')->get();
+        $product = Product::where('id', $id)->with('cart_details')->get();
+
         // dd($product);
         return response()->json($product);
     } //end of create
@@ -64,15 +65,15 @@ class PurchaseController extends Controller
 
             $walletdb = new WalletDatabase();
 
-            $walletdb->cart_id         = $request->cart_id;
-            $walletdb->cart_name       = $request->cart_name;
-            $walletdb->short_descript  = $request->short_descript;
-            $walletdb->cart_text       = $request->cart_text;
-            $walletdb->image           = $request->image;
-            $walletdb->users_id        = Auth::guard('cliants')->user()->id;
-            $walletdb->market_id       = $request->market_id;
+            $walletdb->cart_id = $request->cart_id;
+            $walletdb->cart_name = $request->cart_name;
+            $walletdb->short_descript = $request->short_descript;
+            $walletdb->cart_text = $request->cart_text;
+            $walletdb->image = $request->image;
+            $walletdb->users_id = Auth::guard('cliants')->user()->id;
+            $walletdb->market_id = $request->market_id;
             $walletdb->sub_category_id = $request->sub_category_id;
-            $walletdb->amrecan_price   = $request->amrecan_price;
+            $walletdb->amrecan_price = $request->amrecan_price;
 
             $walletdb->save();
 
@@ -91,6 +92,7 @@ class PurchaseController extends Controller
 
         $carts = Cart::add($request->cart_id, $request->cart_name, 1, $request->amrecan_price)
             ->associate('App\Models\Product');
+
         // dd($carts);
         return redirect()->route('payment');
 

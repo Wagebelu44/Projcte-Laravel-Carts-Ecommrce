@@ -2,23 +2,23 @@
 
 namespace App\Jobs;
 
+use App\Mail\Notify;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\Notify;
-
 
 class NotifyJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $cliants,$product;
-   
-    
-    public function __construct($cliants,$product)
+    public $cliants;
+
+    public $product;
+
+    public function __construct($cliants, $product)
     {
         $this->cliants = $cliants;
         $this->product = $product;
@@ -31,20 +31,16 @@ class NotifyJob implements ShouldQueue
      */
     public function handle()
     {
-        
 
-        $cliants =  $this->cliants;
+        $cliants = $this->cliants;
 
-        $product =  $this->product;
+        $product = $this->product;
 
+        foreach ($cliants as $cliant) {
 
-        foreach($cliants as $cliant){
-
-         Mail::send(new Notify($cliant,$product));
-
+            Mail::send(new Notify($cliant, $product));
 
         }
-
 
     }
 }

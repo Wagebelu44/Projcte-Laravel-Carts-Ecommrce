@@ -7,10 +7,9 @@ use Spatie\Translatable\HasTranslations;
 
 class AbouUs extends Model
 {
-	use HasTranslations;
+    use HasTranslations;
 
     protected $guarded = [];
 
     public $translatable = ['text'];
-
 }//end of model

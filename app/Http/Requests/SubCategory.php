@@ -24,8 +24,8 @@ class SubCategory extends FormRequest
     public function rules()
     {
         return [
-            'name'               => 'required',
-            'name_en'            => 'required',
+            'name' => 'required',
+            'name_en' => 'required',
             'parent_category_id' => 'required',
             'image' => 'image',
             'color1' => 'required',
@@ -36,13 +36,13 @@ class SubCategory extends FormRequest
     public function messages()
     {
         return [
-            'name.required'               => trans('validation.required'),
-            'name_en.required'            => trans('validation.required'),
+            'name.required' => trans('validation.required'),
+            'name_en.required' => trans('validation.required'),
             'parent_category_id.required' => trans('validation.required'),
-            'image.required'              => trans('validation.required'),
-            'color1.required'             => trans('validation.required'),
-            'color2.required'             => trans('validation.required'),
-            
+            'image.required' => trans('validation.required'),
+            'color1.required' => trans('validation.required'),
+            'color2.required' => trans('validation.required'),
+
         ];
     }
 }

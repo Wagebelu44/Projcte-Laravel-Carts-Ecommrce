@@ -15,7 +15,7 @@ class Purchase extends Model
 
     public function getImagePathAttribute()
     {
-        return asset('uploads/pay_currencie/' . $this->image);
+        return asset('uploads/pay_currencie/'.$this->image);
 
     } //end of get image path
 
@@ -31,6 +31,6 @@ class Purchase extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'users_id');
-    }//end of users 
+    }//end of users
 
 }//end of models

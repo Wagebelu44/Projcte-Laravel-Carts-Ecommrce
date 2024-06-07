@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-
 class HowUse extends Model
 {
     use HasTranslations;
@@ -16,9 +15,10 @@ class HowUse extends Model
 
     protected $guarded = [];
 
-    public function sub_category() {
+    public function sub_category()
+    {
 
-	    return $this->belongsTo('App\Models\Sub_Category','sub_categorys_id');
-    
-   	}
+        return $this->belongsTo('App\Models\Sub_Category', 'sub_categorys_id');
+
+    }
 }//end of model

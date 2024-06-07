@@ -2,25 +2,19 @@
 
 namespace App\Jobs;
 
-
+use App\Models\Rate;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Rate;
-
-
-
-
 
 class UpdateCoupon implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $coupon;
-
 
     /**
      * Create a new job instance.
@@ -40,35 +34,33 @@ class UpdateCoupon implements ShouldQueue
     public function handle()
     {
 
-       
-     
-            if(!session()->get('rate') == null){
+        if (! session()->get('rate') == null) {
 
-                if(session()->get('rate') == 'UST'){
-    
-                      $amount =    $this->coupon->discount(Cart::subtotal());
+            if (session()->get('rate') == 'UST') {
 
-                     session()->put('coupon', [
+                $amount = $this->coupon->discount(Cart::subtotal());
+
+                session()->put('coupon', [
                     'name' => $this->coupon->name,
-                    'discount' => round($amount,2),
+                    'discount' => round($amount, 2),
                 ]);
-    
-                  }else{
-    
-                    $amount =    $this->coupon->discount(Cart::subtotal());
-            
-                    $convert =  Rate::select(session()->get('rate'))->value(session()->get('rate'));
 
-                    $newtotal = $amount * $convert;
+            } else {
 
-                 session()->put('coupon', [
-                   'name' => $this->coupon->name,
-                   'discount' => round($newtotal,2),
-               ]);
-    
-                  }
-           
+                $amount = $this->coupon->discount(Cart::subtotal());
+
+                $convert = Rate::select(session()->get('rate'))->value(session()->get('rate'));
+
+                $newtotal = $amount * $convert;
+
+                session()->put('coupon', [
+                    'name' => $this->coupon->name,
+                    'discount' => round($newtotal, 2),
+                ]);
+
+            }
+
         }
-    
-}
+
+    }
 }

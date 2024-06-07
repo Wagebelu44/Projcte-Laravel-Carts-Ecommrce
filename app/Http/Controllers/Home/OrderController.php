@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
-
     public function paystore(Request $request)
     {
 
@@ -39,9 +38,9 @@ class OrderController extends Controller
             }
 
             $result = $cart_category->quantity - $product->qty;
-            $count  = $cart_category->count_of_buy + 1;
+            $count = $cart_category->count_of_buy + 1;
             Product::where('id', $product->id)->update([
-                'quantity'     => $result,
+                'quantity' => $result,
                 'count_of_buy' => $count,
 
             ]);
@@ -51,7 +50,7 @@ class OrderController extends Controller
         foreach ($products as $product) {
 
             CartStore::where('products_id', $product->id)->take($product->qty)->update([
-                'used'      => 1,
+                'used' => 1,
                 'user_name' => \Auth::guard('cliants')->user()->name,
             ]);
 
@@ -59,47 +58,47 @@ class OrderController extends Controller
 
         }
 
-        $discount        = session()->get('coupon')['discount'] ?? 0;
-        $code            = session()->get('coupon')['name'] ?? null;
-        $tax             = config('cart.tax') / 100;
-        $number          = Cart::subtotal();
-        $convertNum      = preg_replace('/,/', '', $number);
-        $newSubtotal     = ($convertNum - $discount);
-        $newTotal        = $newSubtotal;
-        $newTax          = $newSubtotal * $tax;
+        $discount = session()->get('coupon')['discount'] ?? 0;
+        $code = session()->get('coupon')['name'] ?? null;
+        $tax = config('cart.tax') / 100;
+        $number = Cart::subtotal();
+        $convertNum = preg_replace('/,/', '', $number);
+        $newSubtotal = ($convertNum - $discount);
+        $newTotal = $newSubtotal;
+        $newTax = $newSubtotal * $tax;
         $newTotalwithTax = $newTotal * (1 + $tax);
 
-        $date   = date("Y-M-D");
+        $date = date('Y-M-D');
         $digits = 6;
 
-        $file_name = time() . '.' . $request->image->getClientOriginalExtension();
+        $file_name = time().'.'.$request->image->getClientOriginalExtension();
         $request->image->move(public_path('uploads/sub_category_images/'), $file_name);
 
         $code = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
 
         foreach ($products as $cart) {
 
-            $carts                       = CartStore::where('products_id', $cart->id)->take($cart->qty)->get(['cart_code'])->pluck('cart_code')->toArray();
-            $purchases                   = new Purchase();
-            $purchases->number           = $code;
-            $purchases->cart_id          = $cart->id;
-            $purchases->cart_name        = $cart->model->cart_details->cart_name;
-            $purchases->short_descript   = $cart->model->cart_details->short_descript;
-            $purchases->cart_text        = $cart->model->cart_details->cart_text;
-            $purchases->sub_category_id  = $cart->model->sub_category_id;
+            $carts = CartStore::where('products_id', $cart->id)->take($cart->qty)->get(['cart_code'])->pluck('cart_code')->toArray();
+            $purchases = new Purchase();
+            $purchases->number = $code;
+            $purchases->cart_id = $cart->id;
+            $purchases->cart_name = $cart->model->cart_details->cart_name;
+            $purchases->short_descript = $cart->model->cart_details->short_descript;
+            $purchases->cart_text = $cart->model->cart_details->cart_text;
+            $purchases->sub_category_id = $cart->model->sub_category_id;
             $purchases->purchases_status = 2;
-            $purchases->users_id         = \Auth::guard('cliants')->user()->id;
-            $purchases->price            = $cart->price;
-            $purchases->date             = $date;
-            $purchases->status           = '1';
-            $purchases->code             = implode($carts, '<br>');
+            $purchases->users_id = \Auth::guard('cliants')->user()->id;
+            $purchases->price = $cart->price;
+            $purchases->date = $date;
+            $purchases->status = '1';
+            $purchases->code = implode($carts, '<br>');
             // dd($purchases->code);
             $purchases->quantity = $cart->qty;
 
-            $purchases->image           = $file_name;
-            $purchases->totalprice      = $newTotal;
-            $purchases->totaltax        = $newTax;
-            $purchases->rate            = session()->get('price_icon');
+            $purchases->image = $file_name;
+            $purchases->totalprice = $newTotal;
+            $purchases->totaltax = $newTax;
+            $purchases->rate = session()->get('price_icon');
             $purchases->newTotalwithTax = $newTotalwithTax;
 
             $purchases->save();
@@ -111,7 +110,7 @@ class OrderController extends Controller
 
             $cliant = Cliant::where('id', \Auth::guard('cliants')->user()->id)->first();
 
-            if (!$cliant->another_assignmen_link == null) {
+            if (! $cliant->another_assignmen_link == null) {
 
                 $balance = Cliant::where('assignmen_link', $cliant->another_assignmen_link)->first();
 
@@ -130,6 +129,7 @@ class OrderController extends Controller
 
         return redirect()->route('complete');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -149,19 +149,19 @@ class OrderController extends Controller
 
         $pay_currencie = PayCurrencie::all();
 
-        $discount        = session()->get('coupon')['discount'] ?? 0;
-        $code            = session()->get('coupon')['name'] ?? null;
-        $tax             = config('cart.tax') / 100;
-        $number          = Cart::subtotal();
-        $convertNum      = preg_replace('/,/', '', $number);
-        $newSubtotal     = ($convertNum - $discount);
-        $newTotal        = $newSubtotal;
-        $newTax          = $newSubtotal * $tax;
+        $discount = session()->get('coupon')['discount'] ?? 0;
+        $code = session()->get('coupon')['name'] ?? null;
+        $tax = config('cart.tax') / 100;
+        $number = Cart::subtotal();
+        $convertNum = preg_replace('/,/', '', $number);
+        $newSubtotal = ($convertNum - $discount);
+        $newTotal = $newSubtotal;
+        $newTax = $newSubtotal * $tax;
         $newTotalwithTax = $newTotal * (1 + $tax);
         // dd($newTotalwithTax);
 
         return view('home.payment', compact('parent_categories', 'pay_currencie'))->with([
-            'newTax'          => $newTax,
+            'newTax' => $newTax,
             'newTotalwithTax' => $newTotalwithTax,
 
         ]);
@@ -173,8 +173,8 @@ class OrderController extends Controller
         $carts = CartStore::when($request->search, function ($q) use ($request) {
 
             // return $q->HasTranslations('name', '%' . $request->search . '%');
-            return $q->where('users_id', 'like', '%' . $request->search . '%')
-                ->orWhere('products_id', 'like', '%' . $request->search . '%');
+            return $q->where('users_id', 'like', '%'.$request->search.'%')
+                ->orWhere('products_id', 'like', '%'.$request->search.'%');
 
         })->latest()->paginate(10);
 
@@ -195,7 +195,6 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -235,9 +234,9 @@ class OrderController extends Controller
             }
 
             $result = $cart_category->quantity - $product->qty;
-            $count  = $cart_category->count_of_buy + 1;
+            $count = $cart_category->count_of_buy + 1;
             Product::where('id', $product->id)->update([
-                'quantity'     => $result,
+                'quantity' => $result,
                 'count_of_buy' => $count,
 
             ]);
@@ -248,7 +247,7 @@ class OrderController extends Controller
         foreach ($products as $product) {
 
             CartStore::where('products_id', $product->id)->take($product->qty)->update([
-                'used'      => 1,
+                'used' => 1,
                 'user_name' => \Auth::guard('cliants')->user()->name,
                 'cliant_id' => \Auth::guard('cliants')->user()->id,
             ]);
@@ -257,17 +256,17 @@ class OrderController extends Controller
 
         }
 
-        $discount        = session()->get('coupon')['discount'] ?? 0;
-        $code            = session()->get('coupon')['name'] ?? null;
-        $tax             = config('cart.tax') / 100;
-        $number          = Cart::subtotal();
-        $convertNum      = preg_replace('/,/', '', $number);
-        $newSubtotal     = ($convertNum - $discount);
-        $newTotal        = $newSubtotal;
-        $newTax          = $newSubtotal * $tax;
+        $discount = session()->get('coupon')['discount'] ?? 0;
+        $code = session()->get('coupon')['name'] ?? null;
+        $tax = config('cart.tax') / 100;
+        $number = Cart::subtotal();
+        $convertNum = preg_replace('/,/', '', $number);
+        $newSubtotal = ($convertNum - $discount);
+        $newTotal = $newSubtotal;
+        $newTax = $newSubtotal * $tax;
         $newTotalwithTax = $newTotal * (1 + $tax);
 
-        $date = date("Y-M-D");
+        $date = date('Y-M-D');
 
         $digits = 6;
 
@@ -277,23 +276,23 @@ class OrderController extends Controller
 
             $carts = CartStore::where('products_id', $cart->id)->take($cart->qty)->get(['cart_code'])->pluck('cart_code')->toArray();
 
-            $purchases                   = new Purchase();
-            $purchases->number           = $code;
-            $purchases->cart_id          = $cart->id;
-            $purchases->cart_name        = $cart->model->cart_details->cart_name;
-            $purchases->short_descript   = $cart->model->cart_details->short_descript;
-            $purchases->cart_text        = $cart->model->cart_details->cart_text;
-            $purchases->sub_category_id  = $cart->model->sub_category_id;
+            $purchases = new Purchase();
+            $purchases->number = $code;
+            $purchases->cart_id = $cart->id;
+            $purchases->cart_name = $cart->model->cart_details->cart_name;
+            $purchases->short_descript = $cart->model->cart_details->short_descript;
+            $purchases->cart_text = $cart->model->cart_details->cart_text;
+            $purchases->sub_category_id = $cart->model->sub_category_id;
             $purchases->purchases_status = 1;
-            $purchases->users_id         = \Auth::guard('cliants')->user()->id;
-            $purchases->price            = $cart->price;
-            $purchases->date             = $date;
-            $purchases->code             = implode($carts, '<br> ');
-            $purchases->quantity         = $cart->qty;
-            $purchases->totalprice       = $newTotal;
-            $purchases->totaltax         = $newTax;
-            $purchases->rate             = session()->get('price_icon');
-            $purchases->newTotalwithTax  = $newTotalwithTax;
+            $purchases->users_id = \Auth::guard('cliants')->user()->id;
+            $purchases->price = $cart->price;
+            $purchases->date = $date;
+            $purchases->code = implode($carts, '<br> ');
+            $purchases->quantity = $cart->qty;
+            $purchases->totalprice = $newTotal;
+            $purchases->totaltax = $newTax;
+            $purchases->rate = session()->get('price_icon');
+            $purchases->newTotalwithTax = $newTotalwithTax;
 
             $purchases->save();
 
@@ -306,7 +305,7 @@ class OrderController extends Controller
 
             $cliant = Cliant::where('id', \Auth::guard('cliants')->user()->id)->first();
 
-            if (!$cliant->another_assignmen_link == null) {
+            if (! $cliant->another_assignmen_link == null) {
 
                 $balance = Cliant::where('assignmen_link', $cliant->another_assignmen_link)->first();
 
@@ -332,9 +331,7 @@ class OrderController extends Controller
      *
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
-     *
      */
-
     public function complete()
     {
 
@@ -399,14 +396,14 @@ class OrderController extends Controller
 
         $purchases = Purchase::latest()->when($request->search, function ($q) use ($request) {
 
-            return $q->where('numberr', 'like', '%' . $request->search . '%')
-                ->orWhere('date', 'like', '%' . $request->search . '%')
-                ->orWhere('crate', 'like', '%' . $request->search . '%')
-                ->orWhere('price', 'like', '%' . $request->search . '%')
-                ->orWhere('quantity', 'like', '%' . $request->search . '%')
-                ->orWhere('totalprice', 'like', '%' . $request->search . '%')
-                ->orWhere('short_descript->ar', 'like', '%' . $request->search . '%')
-                ->orWhere('short_descript->en', 'like', '%' . $request->search . '%');
+            return $q->where('numberr', 'like', '%'.$request->search.'%')
+                ->orWhere('date', 'like', '%'.$request->search.'%')
+                ->orWhere('crate', 'like', '%'.$request->search.'%')
+                ->orWhere('price', 'like', '%'.$request->search.'%')
+                ->orWhere('quantity', 'like', '%'.$request->search.'%')
+                ->orWhere('totalprice', 'like', '%'.$request->search.'%')
+                ->orWhere('short_descript->ar', 'like', '%'.$request->search.'%')
+                ->orWhere('short_descript->en', 'like', '%'.$request->search.'%');
 
         })->latest()->paginate(10);
 
@@ -422,7 +419,7 @@ class OrderController extends Controller
         $purchases = Purchase::when($request->search, function ($q) use ($request) {
 
             // return $q->HasTranslations('name', '%' . $request->search . '%');
-            return $q->where('number', 'like', '%' . $request->search . '%');
+            return $q->where('number', 'like', '%'.$request->search.'%');
 
         })->latest()->paginate(10);
 
@@ -435,6 +432,7 @@ class OrderController extends Controller
 
         $order->delete();
         notify()->success(__('home.deleted_successfully'));
+
         return redirect()->route('purchase_admin');
 
     }
@@ -444,10 +442,10 @@ class OrderController extends Controller
 
         $carts = CartStore::latest()->when($request->search, function ($q) use ($request) {
 
-            return $q->where('cart_name->ar', 'like', '%' . $request->search . '%')
-                ->orWhere('cart_name->en', 'like', '%' . $request->search . '%')
-                ->orWhere('short_descript->ar', 'like', '%' . $request->search . '%')
-                ->orWhere('short_descript->en', 'like', '%' . $request->search . '%');
+            return $q->where('cart_name->ar', 'like', '%'.$request->search.'%')
+                ->orWhere('cart_name->en', 'like', '%'.$request->search.'%')
+                ->orWhere('short_descript->ar', 'like', '%'.$request->search.'%')
+                ->orWhere('short_descript->en', 'like', '%'.$request->search.'%');
 
         })->latest()->paginate(10);
 
@@ -458,7 +456,6 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function edit(Order $order)
@@ -469,8 +466,6 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Order $order)
@@ -488,6 +483,7 @@ class OrderController extends Controller
     {
         $cartStore->delete();
         notify()->success(__('home.deleted_successfully'));
+
         return redirect()->route('payment-show');
     } //end of destroy
 }

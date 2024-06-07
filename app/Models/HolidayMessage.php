@@ -7,5 +7,4 @@ use Illuminate\Database\Eloquent\Model;
 class HolidayMessage extends Model
 {
     protected $guarded = [];
-
 }//end of model

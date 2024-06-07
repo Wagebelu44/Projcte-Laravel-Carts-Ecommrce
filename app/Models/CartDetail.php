@@ -17,7 +17,7 @@ class CartDetail extends Model
 
     public function getImagePathAttribute()
     {
-        return asset('storage/' . $this->image);
+        return asset('storage/'.$this->image);
 
     } //end of get image path
 
@@ -32,5 +32,4 @@ class CartDetail extends Model
         return $this->belongsTo('App\Models\Sub_Category', 'sub_category_id');
 
     }
-
 } //end of models

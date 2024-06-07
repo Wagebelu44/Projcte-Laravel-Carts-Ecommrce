@@ -22,8 +22,8 @@ class CartRequest extends FormRequest
             'cart_details_id' => 'required',
             // 'market_id'       => 'required',
             'sub_category_id' => 'required',
-            'balance'       => 'required',
-            'stars'         => 'required',
+            'balance' => 'required',
+            'stars' => 'required',
             'amrecan_price' => 'required',
             // 'quantity'      => 'required',
         ];
@@ -41,7 +41,7 @@ class CartRequest extends FormRequest
             // 'cart_text.required'         => trans('validation.required'),
             // 'cart_text_en.required'      => trans('validation.required'),
             // 'sub_category_id.required'   => trans('validation.required'),
-            // 'amrecan_price.required'     => trans('validation.required'),        
+            // 'amrecan_price.required'     => trans('validation.required'),
         ];
     }
 }

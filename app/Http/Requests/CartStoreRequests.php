@@ -24,23 +24,22 @@ class CartStoreRequests extends FormRequest
     public function rules()
     {
         return [
-            'cart_name'         => 'required|min:2|max:150',
-            'cart_name_en'      => 'required|min:2|max:150',
-            'cart_code'         => 'required',
-            'products_id'       => 'required',
-            
+            'cart_name' => 'required|min:2|max:150',
+            'cart_name_en' => 'required|min:2|max:150',
+            'cart_code' => 'required',
+            'products_id' => 'required',
+
         ];
     }
 
-     public function messages()
+    public function messages()
     {
         return [
-            'cart_name.required'         => trans('validation.required'),
-            'cart_name_en.required'      => trans('validation.required'),
-            'cart_code.required'         => trans('validation.required'),
-            'products_id.required'       => trans('validation.required'),
-         
+            'cart_name.required' => trans('validation.required'),
+            'cart_name_en.required' => trans('validation.required'),
+            'cart_code.required' => trans('validation.required'),
+            'products_id.required' => trans('validation.required'),
+
         ];
     }
-
 }

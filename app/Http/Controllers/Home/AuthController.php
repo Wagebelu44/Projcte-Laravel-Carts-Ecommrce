@@ -14,7 +14,6 @@ use Socialite;
 
 class AuthController extends Controller
 {
-
     public function verifyindex()
     {
         return view('auth.verify');
@@ -26,10 +25,10 @@ class AuthController extends Controller
         // dd($request->all());
 
         $data = $request->validate([
-            'name'         => ['required', 'string', 'max:255'],
-            'email'        => ['required', 'string', 'email', 'max:255', 'unique:cliants'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:cliants'],
             'phone_number' => ['required'],
-            'password'     => ['required', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8'],
             // 'g-recaptcha-response' => 'required|captcha'
         ]);
 
@@ -37,14 +36,14 @@ class AuthController extends Controller
             // dd($request->all());
 
             $digits = 4;
-            $code   = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
+            $code = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
 
             $cliant = Cliant::create([
-                'email'        => $data['email'],
-                'name'         => $data['name'],
+                'email' => $data['email'],
+                'name' => $data['name'],
                 'phone_number' => $data['phone_number'],
-                'code_phone'   => $code,
-                'password'     => Hash::make($data['password']),
+                'code_phone' => $code,
+                'password' => Hash::make($data['password']),
             ]);
             //     $curl = curl_init();
 
@@ -91,7 +90,7 @@ class AuthController extends Controller
 
             if (auth()->guard('cliants')->attempt(
                 [
-                    'email'    => $request->input("email"),
+                    'email' => $request->input('email'),
                     'password' => $request->input('password'),
                 ], $remember_me));
 
@@ -101,16 +100,16 @@ class AuthController extends Controller
 
                 foreach ($sessions as $session) {
 
-                    $walletdb                  = new WalletDatabase();
-                    $walletdb->cart_id         = $session->id;
-                    $walletdb->cart_name       = $session->cart_name;
-                    $walletdb->short_descript  = $session->short_descript;
-                    $walletdb->cart_text       = $session->cart_text;
-                    $walletdb->users_id        = Auth::guard('cliants')->user()->id;
-                    $walletdb->market_id       = $session->market_id;
-                    $walletdb->image           = $session->image;
+                    $walletdb = new WalletDatabase();
+                    $walletdb->cart_id = $session->id;
+                    $walletdb->cart_name = $session->cart_name;
+                    $walletdb->short_descript = $session->short_descript;
+                    $walletdb->cart_text = $session->cart_text;
+                    $walletdb->users_id = Auth::guard('cliants')->user()->id;
+                    $walletdb->market_id = $session->market_id;
+                    $walletdb->image = $session->image;
                     $walletdb->sub_category_id = $session->sub_category_id;
-                    $walletdb->amrecan_price   = $session->amrecan_price;
+                    $walletdb->amrecan_price = $session->amrecan_price;
 
                     $walletdb->save();
 
@@ -138,7 +137,7 @@ class AuthController extends Controller
         // dd($request->all());
         $cliant = Cliant::where('code_phone', $request->code)->first();
 
-        if (!$cliant == null) {
+        if (! $cliant == null) {
 
             $cliant->update([
 
@@ -180,9 +179,9 @@ class AuthController extends Controller
     public function redirect($provider)
     {
         config([
-            'services.' . $provider . '.client_id'     => setting($provider . '_client_id'),
-            'services.' . $provider . '.client_secret' => setting($provider . '_client_secret'),
-            'services.' . $provider . '.redirect_url'  => setting($provider . '_redirect_url'),
+            'services.'.$provider.'.client_id' => setting($provider.'_client_id'),
+            'services.'.$provider.'.client_secret' => setting($provider.'_client_secret'),
+            'services.'.$provider.'.redirect_url' => setting($provider.'_redirect_url'),
 
         ]);
 
@@ -207,19 +206,19 @@ class AuthController extends Controller
             ->where('provider_id', $social_client->getId())
             ->first();
 
-        if (!$cliants) {
+        if (! $cliants) {
 
             $digits = 4;
-            $code   = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
+            $code = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
 
             Cliant::create([
-                'name'         => $social_client->getName(),
-                'email'        => $social_client->getEmail(),
-                'image'        => $social_client->getAvatar(),
+                'name' => $social_client->getName(),
+                'email' => $social_client->getEmail(),
+                'image' => $social_client->getAvatar(),
                 'phone_number' => $social_client->getPhone(),
-                'provider'     => $provider,
-                'code_phone'   => $code,
-                'provider_id'  => $provider_id->getID(),
+                'provider' => $provider,
+                'code_phone' => $code,
+                'provider_id' => $provider_id->getID(),
             ]);
 
         } //end of if
@@ -240,16 +239,16 @@ class AuthController extends Controller
 
             foreach ($sessions as $session) {
 
-                $walletdb                  = new WalletDatabase();
-                $walletdb->cart_id         = $session->id;
-                $walletdb->cart_name       = $session->cart_name;
-                $walletdb->short_descript  = $session->short_descript;
-                $walletdb->cart_text       = $session->cart_text;
-                $walletdb->users_id        = Auth::guard('cliants')->user()->id;
-                $walletdb->market_id       = $session->market_id;
-                $walletdb->image           = $session->image;
+                $walletdb = new WalletDatabase();
+                $walletdb->cart_id = $session->id;
+                $walletdb->cart_name = $session->cart_name;
+                $walletdb->short_descript = $session->short_descript;
+                $walletdb->cart_text = $session->cart_text;
+                $walletdb->users_id = Auth::guard('cliants')->user()->id;
+                $walletdb->market_id = $session->market_id;
+                $walletdb->image = $session->image;
                 $walletdb->sub_category_id = $session->sub_category_id;
-                $walletdb->amrecan_price   = $session->amrecan_price;
+                $walletdb->amrecan_price = $session->amrecan_price;
 
                 $walletdb->save();
 
@@ -263,7 +262,7 @@ class AuthController extends Controller
     public function returnverify()
     {
 
-        $id     = \Auth::guard('cliants')->user()->id;
+        $id = \Auth::guard('cliants')->user()->id;
         $cliant = Cliant::where('id', $id)->first();
 
         $code = mt_srand(4);

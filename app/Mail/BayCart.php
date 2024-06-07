@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -12,6 +11,7 @@ class BayCart extends Mailable
     use Queueable, SerializesModels;
 
     public $carts;
+
     /**
      * Create a new message instance.
      *
@@ -21,10 +21,8 @@ class BayCart extends Mailable
     {
         $this->carts = $carts;
 
-      
     }
 
-    
     /**
      * Build the message.
      *
@@ -33,7 +31,7 @@ class BayCart extends Mailable
     public function build()
     {
         return $this->to(\Auth::guard('cliants')->user()->email)
-                    ->subject('majal store')
-                    ->markdown('emails.payment_cart');
+            ->subject('majal store')
+            ->markdown('emails.payment_cart');
     }
 }

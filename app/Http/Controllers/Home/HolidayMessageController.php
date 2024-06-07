@@ -14,7 +14,7 @@ class HolidayMessageController extends Controller
 
         $emails = HolidayMessage::latest()->when($request->search, function ($q) use ($request) {
 
-            return $q->where('text', 'like', '%' . $request->search . '%');
+            return $q->where('text', 'like', '%'.$request->search.'%');
 
         })->latest()->paginate(10);
 
