@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Home;
 
+use Illuminate\View\View;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Mail\StarsOrder;
 use App\Models\CartStore;
@@ -21,7 +23,7 @@ class StarsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
 
         if (session()->get('rate') == null) {
@@ -189,7 +191,7 @@ class StarsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function notify(Request $request)
+    public function notify(Request $request): Response
     {
 
         Notify::create($request->all());
@@ -204,7 +206,7 @@ class StarsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         //
     }
@@ -215,7 +217,7 @@ class StarsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         //
     }
@@ -226,7 +228,7 @@ class StarsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         //
     }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Home;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Mail\BayCart;
 use App\Models\CartStore;
@@ -135,7 +137,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
 
         if (session()->get('rate') == null) {
@@ -332,7 +334,7 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function complete()
+    public function complete(): View
     {
 
         $random_carts = Product::inRandomOrder()->paginate(10);
@@ -343,7 +345,7 @@ class OrderController extends Controller
 
     }
 
-    public function my_purchase()
+    public function my_purchase(): View
     {
 
         $parent_categories = Parent_Category::with('sub_category')->get();
@@ -354,7 +356,7 @@ class OrderController extends Controller
 
     }
 
-    public function purchase_details($number)
+    public function purchase_details($number): View
     {
 
         $parent_categories = Parent_Category::with('sub_category')->get();
@@ -374,7 +376,7 @@ class OrderController extends Controller
 
     }
 
-    public function purchase_invoices($number)
+    public function purchase_invoices($number): View
     {
 
         $purchases = Purchase::where('number', $number)->get();
@@ -427,7 +429,7 @@ class OrderController extends Controller
 
     }
 
-    public function purchase_delete(Purchase $order)
+    public function purchase_delete(Purchase $order): RedirectResponse
     {
 
         $order->delete();
@@ -479,7 +481,7 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CartStore $cartStore)
+    public function destroy(CartStore $cartStore): RedirectResponse
     {
         $cartStore->delete();
         notify()->success(__('home.deleted_successfully'));

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Usage_Policy;
 use Illuminate\Http\Request;
@@ -31,12 +33,12 @@ class UsagePolicyController extends Controller
         return view('dashboard.settings.usage_policy.index', compact('usage_policys'));
     }//end of index
 
-    public function create()
+    public function create(): View
     {
         return view('dashboard.settings.usage_policy.create');
     }//end of icreate
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         // dd($request->all());
         try {
@@ -58,14 +60,14 @@ class UsagePolicyController extends Controller
         }//end try
     }//end of store
 
-    public function edit(Usage_Policy $usage_Policy, $id)
+    public function edit(Usage_Policy $usage_Policy, $id): View
     {
         $usage_Policy = Usage_Policy::find($id);
 
         return view('dashboard.settings.usage_policy.edit', compact('usage_Policy'));
     }//end of edit
 
-    public function update(Request $request, Usage_Policy $usage_Policy, $id)
+    public function update(Request $request, Usage_Policy $usage_Policy, $id): RedirectResponse
     {
         // dd($request->all());
         $usage_Policy = Usage_Policy::find($id);
@@ -86,7 +88,7 @@ class UsagePolicyController extends Controller
         }//end try
     }//end of update
 
-    public function destroy(Usage_Policy $usage_Policy, $id)
+    public function destroy(Usage_Policy $usage_Policy, $id): RedirectResponse
     {
         $usage_Policy = Usage_Policy::find($id);
         $usage_Policy->delete();

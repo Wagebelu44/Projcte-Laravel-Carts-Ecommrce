@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Jobs\UpdateCoupon;
 use App\Models\Cupon;
@@ -34,7 +35,7 @@ class CouponsController extends Controller
 
     }//end of function
 
-    public function destroy()
+    public function destroy(): JsonResponse
     {
 
         $coupon = session()->forget('coupon');

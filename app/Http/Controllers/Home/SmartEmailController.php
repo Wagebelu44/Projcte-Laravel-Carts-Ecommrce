@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Home;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Jobs\SmartEmailJob;
 use App\Models\SmartEmail;
@@ -22,7 +24,7 @@ class SmartEmailController extends Controller
 
     }//end of index
 
-    public function create()
+    public function create(): View
     {
 
         $emails = SmartEmail::latest()->get();
@@ -31,7 +33,7 @@ class SmartEmailController extends Controller
 
     }//end of creqate
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
 
         $emails = SmartEmail::latest()->get();

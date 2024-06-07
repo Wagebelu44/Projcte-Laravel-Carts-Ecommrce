@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Home;
 
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\AbouUs;
 use App\Models\CommonQuestions;
@@ -15,7 +17,7 @@ use Illuminate\Http\Request;
 
 class FooterController extends Controller
 {
-    public function common_questions()
+    public function common_questions(): View
     {
         $parent_categories = Parent_Category::with('sub_category')->get();
 
@@ -24,14 +26,14 @@ class FooterController extends Controller
         return view('home.footer.common_questions', compact('common_questions', 'parent_categories'));
     }//end of show contact us page
 
-    public function showcontact()
+    public function showcontact(): View
     {
         $parent_categories = Parent_Category::with('sub_category')->get();
 
         return view('home.footer.contact', compact('parent_categories'));
     }//end of show contact us page
 
-    public function showPrivacyPolicy()
+    public function showPrivacyPolicy(): View
     {
         $parent_categories = Parent_Category::with('sub_category')->get();
         $privacy_policys = PrivacyPolicy::all();
@@ -39,7 +41,7 @@ class FooterController extends Controller
         return view('home.footer.PrivacyPolicy', compact('parent_categories', 'privacy_policys'));
     }//end of show contact us page
 
-    public function storecontact(Request $request)
+    public function storecontact(Request $request): Response
     {
         $request->validate([
             'name' => 'required',
@@ -55,7 +57,7 @@ class FooterController extends Controller
 
     }//end of store contact us page
 
-    public function showabout()
+    public function showabout(): View
     {
         $parent_categories = Parent_Category::with('sub_category')->get();
         $about_us = AbouUs::all();
@@ -65,7 +67,7 @@ class FooterController extends Controller
         return view('home.footer.about', compact('parent_categories', 'about_us'));
     }//end of show contact us page
 
-    public function showRecovery()
+    public function showRecovery(): View
     {
         $parent_categories = Parent_Category::with('sub_category')->get();
         $return_policys = ReturnPolicy::all();
@@ -73,7 +75,7 @@ class FooterController extends Controller
         return view('home.footer.recovery', compact('parent_categories', 'return_policys'));
     }//end of show contact us page
 
-    public function ShowUsagePolicy()
+    public function ShowUsagePolicy(): View
     {
         $parent_categories = Parent_Category::with('sub_category')->get();
         $usage_policys = Usage_Policy::all();

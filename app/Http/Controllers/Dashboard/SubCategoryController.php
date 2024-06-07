@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubCategory;
 use App\Models\Parent_Category;
@@ -36,7 +38,7 @@ class SubCategoryController extends Controller
         return view('dashboard.sub_category.index', compact('sub_categories'));
     }//end of index
 
-    public function create()
+    public function create(): View
     {
 
         $parent_categories = Parent_Category::get();
@@ -45,7 +47,7 @@ class SubCategoryController extends Controller
 
     }//end of create
 
-    public function store(SubCategory $request)
+    public function store(SubCategory $request): RedirectResponse
     {
 
         $request->validate([
@@ -81,7 +83,7 @@ class SubCategoryController extends Controller
 
     }//end of store
 
-    public function edit(sub_category $sub_category)
+    public function edit(sub_category $sub_category): View
     {
         $parent_categories = Parent_Category::get();
 
@@ -89,7 +91,7 @@ class SubCategoryController extends Controller
 
     }//end of edit
 
-    public function update(SubCategory $request, Sub_Category $sub_category)
+    public function update(SubCategory $request, Sub_Category $sub_category): RedirectResponse
     {
 
         // try {
@@ -132,7 +134,7 @@ class SubCategoryController extends Controller
 
     }//end of update
 
-    public function destroy(sub_category $sub_category)
+    public function destroy(sub_category $sub_category): RedirectResponse
     {
 
         if ($sub_category->image != 'default.png') {

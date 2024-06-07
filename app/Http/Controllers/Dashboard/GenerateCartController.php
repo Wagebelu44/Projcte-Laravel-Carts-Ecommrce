@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use App\Exports\GenerateCartExports;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GenerateCartRequest;
@@ -80,7 +82,7 @@ class GenerateCartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $markets = Market::all();
         $sub_categorys = Sub_Category::all();
@@ -94,7 +96,7 @@ class GenerateCartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GenerateCartRequest $request)
+    public function store(GenerateCartRequest $request): RedirectResponse
     {
         $request_all = $request->all();
 
@@ -168,7 +170,7 @@ class GenerateCartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(GenerateCartRequest $request, GenerateCart $generateCart)
+    public function update(GenerateCartRequest $request, GenerateCart $generateCart): RedirectResponse
     {
 
         try {
@@ -201,7 +203,7 @@ class GenerateCartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GenerateCart $generateCart)
+    public function destroy(GenerateCart $generateCart): RedirectResponse
     {
 
         $generateCart->delete();
@@ -219,7 +221,7 @@ class GenerateCartController extends Controller
         return Excel::download(new GenerateCartExports, 'Generate-Excel-Carts.xls');
     }
 
-    public function ended_carts()
+    public function ended_carts(): View
     {
 
         $endeds = GenerateCart::where('status', '1')->get();
@@ -227,7 +229,7 @@ class GenerateCartController extends Controller
         return view('dashboard.generate_carts.ended', compact('endeds'));
     }
 
-    public function edit_status(GenerateCart $generateCart)
+    public function edit_status(GenerateCart $generateCart): View
     {
 
         $generateCart->update([

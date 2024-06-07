@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\Cliant;
 use App\Models\Parent_Category;
@@ -14,7 +15,7 @@ class AssignmenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($assign)
+    public function index($assign): View
     {
 
         $parent_categories = Parent_Category::with('sub_category')->get();
@@ -75,7 +76,7 @@ class AssignmenController extends Controller
         return view('home.welcome', compact('parent_categories', 'carts'));
     }
 
-    public function get()
+    public function get(): View
     {
 
         if (! \Auth::guard('cliants')->user() == null) {

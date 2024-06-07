@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\AbouUs;
 use App\Models\CartStore;
@@ -33,7 +34,7 @@ class WelcomeController extends Controller
         $this->middleware(['permission:dashboard_read'])->only('index');
     }//end of constructor
 
-    public function index()
+    public function index(): View
     {
         $users_count = User::whereRoleIs('admin')->count();
         $Cliant_count = Cliant::count();

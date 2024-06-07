@@ -28,7 +28,7 @@ class BayCart extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): static
     {
         return $this->to(\Auth::guard('cliants')->user()->email)
             ->subject('majal store')

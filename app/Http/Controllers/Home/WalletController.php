@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Home;
 
+use Illuminate\View\View;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Parent_Category;
 use App\Models\Product;
@@ -12,7 +14,7 @@ use Illuminate\Http\Request;
 
 class WalletController extends Controller
 {
-    public function index()
+    public function index(): View
     {
 
         if (session()->get('rate') == null) {
@@ -128,7 +130,7 @@ class WalletController extends Controller
         // return back()->with('success_message', 'Item was added to your cart!!!!');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): JsonResponse
     {
         // $validator = Validator::make($request->all(), [
         //     'quantity' => 'required|numeric'
@@ -164,7 +166,7 @@ class WalletController extends Controller
         // return back()->withSuccess('secess delete');
     }
 
-    public function IncDes(Request $request, $id)
+    public function IncDes(Request $request, $id): JsonResponse
     {
 
         $a = Cart::update($id, $request->quantity);

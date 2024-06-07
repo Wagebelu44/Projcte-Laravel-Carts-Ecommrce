@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Mail\Ticit;
 use App\Models\Parent_Category;
@@ -22,7 +23,7 @@ class SupportCartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         if (session()->get('rate') == null) {
 
@@ -131,7 +132,7 @@ class SupportCartController extends Controller
      * @param  \App\Models\SupportCart  $supportCart
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id): View
     {
         $ticits = SupportCart::find($id);
         // dd($ticits);

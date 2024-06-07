@@ -28,7 +28,7 @@ class MatchOldPassword implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes(string $attribute, $value): bool
     {
         return Hash::check($value, Auth::guard('cliants')->user()->password);
     }
@@ -38,7 +38,7 @@ class MatchOldPassword implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return 'The validation error message.';
     }

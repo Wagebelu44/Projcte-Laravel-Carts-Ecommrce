@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Home;
 
+use Illuminate\View\View;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Market;
 use App\Models\Parent_Category;
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
-    public function index()
+    public function index(): View
     {
 
         if (session()->get('rate') == null) {
@@ -41,7 +43,7 @@ class PurchaseController extends Controller
         return response()->json($sub_category);
     } //end of create
 
-    public function sub_categoryed($id)
+    public function sub_categoryed($id): JsonResponse
     {
         $marketd = Market::where('id', $id)->get();
 

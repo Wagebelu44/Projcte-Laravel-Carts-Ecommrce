@@ -28,7 +28,7 @@ class contact extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): static
     {
         // dd($this->ticit->email);
         return $this->to($this->ticit[0])

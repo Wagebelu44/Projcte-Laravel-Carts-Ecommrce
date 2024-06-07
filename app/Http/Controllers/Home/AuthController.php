@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Home;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Mail\EmailVerify;
 use App\Models\Cliant;
@@ -14,7 +16,7 @@ use Socialite;
 
 class AuthController extends Controller
 {
-    public function verifyindex()
+    public function verifyindex(): View
     {
         return view('auth.verify');
     }//end of verifyindex
@@ -124,7 +126,7 @@ class AuthController extends Controller
 
     } //end of function register
 
-    public function verify(Request $request)
+    public function verify(Request $request): View
     {
 
         return view('home.verify_phone');
@@ -154,7 +156,7 @@ class AuthController extends Controller
 
     }//end of isverify
 
-    public function emailverify($id, $code)
+    public function emailverify($id, $code): RedirectResponse
     {
 
         $cliant = Cliant::where('id', $id)->first();
@@ -188,7 +190,7 @@ class AuthController extends Controller
         return Socialite::driver($provider)->redirect();
     } //end ofredirect
 
-    public function Callback($provider)
+    public function Callback($provider): RedirectResponse
     {
 
         try {

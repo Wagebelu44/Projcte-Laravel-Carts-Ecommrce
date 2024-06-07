@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\HowUse;
 use App\Models\Market;
@@ -18,7 +19,7 @@ use Illuminate\Http\Request;
 ////////////////////////////
 class WelcomeController extends Controller
 {
-    public function how_useage($sub_category_id)
+    public function how_useage($sub_category_id): View
     {
         // dd($id);
         $parent_categories = Parent_Category::with('sub_category')->get();
@@ -143,7 +144,7 @@ class WelcomeController extends Controller
 
     }
 
-    public function show_market($category)
+    public function show_market($category): View
     {
         $parent_categories = Parent_Category::with('sub_category')->get();
 
@@ -161,7 +162,7 @@ class WelcomeController extends Controller
 
     } //end if  function show_market
 
-    public function show_carts($category, $market)
+    public function show_carts($category, $market): View
     {
 
         $markets = [];
@@ -203,7 +204,7 @@ class WelcomeController extends Controller
 
     } //end of function
 
-    public function show_details($category, $cart)
+    public function show_details($category, $cart): View
     {
 
         //  dd($category,$cart);

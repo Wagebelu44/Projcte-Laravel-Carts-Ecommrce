@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Models\CommonQuestions;
 use Illuminate\Http\Request;
@@ -33,12 +35,12 @@ class CommonQuestionsController extends Controller
 
     }//end of index
 
-    public function create()
+    public function create(): View
     {
         return view('dashboard.settings.common_questions.create');
     }//end of create
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
 
         try {
@@ -64,14 +66,14 @@ class CommonQuestionsController extends Controller
         }//end try
     }//end of store
 
-    public function edit(CommonQuestions $commonQuestions, $id)
+    public function edit(CommonQuestions $commonQuestions, $id): View
     {
         $commonQuestions = CommonQuestions::find($id);
 
         return view('dashboard.settings.common_questions.edit', compact('commonQuestions'));
     }//end of edit
 
-    public function update(Request $request, CommonQuestions $commonQuestions, $id)
+    public function update(Request $request, CommonQuestions $commonQuestions, $id): RedirectResponse
     {
         $commonQuestions = commonQuestions::find($id);
         try {
@@ -92,7 +94,7 @@ class CommonQuestionsController extends Controller
         }//end try
     }//endof update
 
-    public function destroy(CommonQuestions $commonQuestions, $id)
+    public function destroy(CommonQuestions $commonQuestions, $id): RedirectResponse
     {
         $commonQuestions = CommonQuestions::find($id);
         $commonQuestions->delete();

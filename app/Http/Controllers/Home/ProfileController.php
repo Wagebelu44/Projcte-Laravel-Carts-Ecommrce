@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Home;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Cliant;
 use App\Models\GenerateCart;
@@ -92,7 +94,7 @@ class ProfileController extends Controller
         // return redirect()->back();
     }
 
-    public function show(Cliant $cliants)
+    public function show(Cliant $cliants): View
     {
         $id = Auth::guard('cliants')->user()->id;
         $parent_categories = Parent_Category::with('sub_category')->get();
@@ -139,7 +141,7 @@ class ProfileController extends Controller
 
     }
 
-    public function update(Request $request, Cliant $cliants, $id)
+    public function update(Request $request, Cliant $cliants, $id): RedirectResponse
     {
         // dd($request->all());
         $request->validate([
@@ -196,7 +198,7 @@ class ProfileController extends Controller
         // return redirect()->back();
     } //end of update
 
-    public function logouts()
+    public function logouts(): RedirectResponse
     {
         Auth::guard('cliants')->logout();
 

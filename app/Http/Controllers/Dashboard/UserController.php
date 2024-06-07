@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,13 +40,13 @@ class UserController extends Controller
 
     }//end of index
 
-    public function create()
+    public function create(): View
     {
         return view('dashboard.users.create');
 
     }//end of create
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         //dd($request->all());
         $request->validate([
@@ -80,13 +82,13 @@ class UserController extends Controller
 
     }//end of store
 
-    public function edit(User $user)
+    public function edit(User $user): View
     {
         return view('dashboard.users.edit', compact('user'));
 
     }//end of user
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user): RedirectResponse
     {
         $request->validate([
             'name' => 'required',
@@ -125,7 +127,7 @@ class UserController extends Controller
 
     }//end of update
 
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
         if ($user->image != 'default.png') {
 

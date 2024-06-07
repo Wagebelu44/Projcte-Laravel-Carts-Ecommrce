@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MarketRequest;
 use App\Models\Market;
@@ -33,14 +35,14 @@ class MarketController extends Controller
         return view('dashboard.markets.index', compact('markets'));
     }//end of index
 
-    public function create()
+    public function create(): View
     {
         $sub_categorys = Sub_Category::all();
 
         return view('dashboard.markets.create', compact('sub_categorys'));
     }//end create
 
-    public function store(MarketRequest $request)
+    public function store(MarketRequest $request): RedirectResponse
     {
         try {
 
@@ -62,7 +64,7 @@ class MarketController extends Controller
 
     }//end store
 
-    public function edit(Market $market)
+    public function edit(Market $market): View
     {
         $sub_categorys = Sub_Category::all();
 
@@ -70,7 +72,7 @@ class MarketController extends Controller
 
     }//end of edit
 
-    public function update(MarketRequest $request, Market $market)
+    public function update(MarketRequest $request, Market $market): RedirectResponse
     {
 
         try {
@@ -104,7 +106,7 @@ class MarketController extends Controller
 
     }//end of update
 
-    public function destroy(Market $market)
+    public function destroy(Market $market): RedirectResponse
     {
         if ($market->image != 'market_images/default.png') {
 

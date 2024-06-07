@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CartStoreRequests;
 use App\Jobs\NotifyJob;
@@ -40,7 +42,7 @@ class CartStoreController extends Controller
         return view('dashboard.carts_store.index', compact('carts_store'));
     } //end of index
 
-    public function create()
+    public function create(): View
     {
         $products = Product::all();
         $sub_categorys = Sub_Category::all();
@@ -48,7 +50,7 @@ class CartStoreController extends Controller
         return view('dashboard.carts_store.create', compact('products', 'sub_categorys'));
     } //end of create
 
-    public function store(CartStoreRequests $request, Product $products)
+    public function store(CartStoreRequests $request, Product $products): RedirectResponse
     {
 
         // try {
@@ -102,7 +104,7 @@ class CartStoreController extends Controller
 
     } //end of store
 
-    public function edit(CartStore $cartStore, $id)
+    public function edit(CartStore $cartStore, $id): View
     {
         $products = Product::all();
         $cartStore = CartStore::find($id);
@@ -111,7 +113,7 @@ class CartStoreController extends Controller
         return view('dashboard.carts_store.edit', compact('cartStore', 'products', 'sub_categorys'));
     } //end of edit
 
-    public function update(CartStoreRequests $request, CartStore $cartStore, $id)
+    public function update(CartStoreRequests $request, CartStore $cartStore, $id): RedirectResponse
     {
         try {
 
@@ -136,7 +138,7 @@ class CartStoreController extends Controller
         } //end try
     } //end of update
 
-    public function destroy(CartStore $cartStore, $id)
+    public function destroy(CartStore $cartStore, $id): RedirectResponse
     {
         $cartStore = CartStore::find($id);
         $cartStore->delete();
